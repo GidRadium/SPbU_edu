@@ -11,6 +11,7 @@ int countZeros(int *array, int arraySize)
             counter++;
         }
     }
+
     return counter;
 }
 
@@ -24,12 +25,14 @@ int main(int argc, char *argv[])
         printf("ERROR! Array size can't be less than 0.\n");
         return -1;
     }
+    
     printf("Enter array:\n");
     int *array = malloc(sizeof(int) * arraySize);
     for (int i = 0; i < arraySize; i++)
     {
         scanf("%d", &array[i]);
     }
+
     printf("Count of zeros: %d", countZeros(array, arraySize));
     return 0;
 }
