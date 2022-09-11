@@ -7,16 +7,19 @@ void swapIntegers(int *a, int *b)
     *a = (*a ^ *b);
 }
 
-int main(int argc, char *argv[])
+int main(void)
 {
-    int a = 0;
-    int b = 0;
     printf("a = ");
+    int a = 0;
     scanf("%d", &a);
     printf("b = ");
+    int b = 0;
     scanf("%d", &b);
+
     swapIntegers(&a, &b);
+
     printf("a = %d\n", a);
     printf("b = %d\n", b);
+
     return 0;
 }

@@ -15,7 +15,7 @@ int countZeros(int *array, int arraySize)
     return counter;
 }
 
-int main(int argc, char *argv[])
+int main(void)
 {
     printf("Enter array size: ");
     int arraySize = 0;
@@ -34,5 +34,6 @@ int main(int argc, char *argv[])
     }
 
     printf("Count of zeros: %d", countZeros(array, arraySize));
+    
     return 0;
 }

@@ -10,10 +10,11 @@ int devide(int a, int b)
         exit(-1);
     }
 
-    int quotient = 0;
     bool isNegative = (a < 0) ^ (b < 0);
     a = abs(a);
     b = abs(b);
+    
+    int quotient = 0;
     while ((quotient + 1) * b <= a)
     {
         quotient++;
@@ -32,14 +33,17 @@ int devide(int a, int b)
     return quotient;
 }
 
-int main(int argc, char *argv[])
+int main(void)
 {
     printf("a = ");
     int a = 0;
     scanf("%d", &a);
+
     printf("b = ");
     int b = 0;
     scanf("%d", &b);
+
     printf("a / b = %d\b", devide(a, b));
+
     return 0;
 }
