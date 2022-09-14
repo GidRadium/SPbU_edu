@@ -2,16 +2,12 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-void printPrimes(int limit)
-{
+void printPrimes(size_t limit) {
     bool *mask = calloc((limit + 1), sizeof(bool));
-    for (int i = 2; i <= limit; i++)
-    {
-        if (!mask[i])
-        {
+    for (size_t i = 2; i <= limit; i++) {
+        if (!mask[i]) {
             printf("%d ", i);
-            for (int j = i; j <= limit; j += i)
-            {
+            for (size_t j = i; j <= limit; j += i) {
                 mask[j] = 1;
             }
         }
@@ -20,13 +16,11 @@ void printPrimes(int limit)
     free(mask);
 }
 
-int main(void)
-{
+int main(void) {
     printf("Enter limit: ");
     int limit = 0;
     scanf("%d", &limit);
-    if (limit < 2)
-    {
+    if (limit < 2) {
         printf("There are no primes less than %d!", limit + 1);
         return 0;
     }

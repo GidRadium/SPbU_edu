@@ -1,25 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int countHappyTickets(void)
-{
-    const int maskArraySize = 28;
-    int *maskArray = calloc(maskArraySize, sizeof(int));
+int countHappyTickets(void) {
+    const size_t maskArraySize = 28;
+    size_t *maskArray = calloc(maskArraySize, sizeof(size_t));
 
-    for (int i = 0; i < 10; i++)
-    {
-        for (int j = 0; j < 10; j++)
-        {
-            for (int k = 0; k < 10; k++)
-            {
+    for (size_t i = 0; i < 10; i++) {
+        for (size_t j = 0; j < 10; j++) {
+            for (size_t k = 0; k < 10; k++) {
                 maskArray[i + j + k]++;
             }
         }
     }
     
-    int answer = 0;
-    for (int i = 0; i < maskArraySize; i++)
-    {
+    size_t answer = 0;
+    for (size_t i = 0; i < maskArraySize; i++) {
         answer += maskArray[i] * maskArray[i];
     }
 
@@ -28,8 +23,7 @@ int countHappyTickets(void)
     return answer;
 }
 
-int main(void)
-{
+int main(void) {
     printf("Happy tickets count is %d\b", countHappyTickets());
 
     return 0;
