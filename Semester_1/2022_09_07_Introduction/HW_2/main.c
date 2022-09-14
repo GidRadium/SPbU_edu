@@ -34,6 +34,8 @@ int main(void)
     }
 
     printf("Count of zeros: %d", countZeros(array, arraySize));
-    
+
+    free(array);
+
     return 0;
 }

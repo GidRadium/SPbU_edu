@@ -21,7 +21,9 @@ int countHappyTickets(void)
     for (int i = 0; i < maskArraySize; i++)
     {
         answer += maskArray[i] * maskArray[i];
-    }           
+    }
+
+    free(maskArray);
 
     return answer;
 }

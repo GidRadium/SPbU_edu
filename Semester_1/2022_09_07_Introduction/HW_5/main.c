@@ -52,6 +52,8 @@ int main(void)
     fgets(bracketSequence, bracketSequenceSize + 1, stdin);
     
     printf(isBracketSequenceCorrect(bracketSequence, bracketSequenceSize) ? "Bracket sequence is correct!\n" : "Bracket sequence is NOT correct!\n");
-    
+
+    free(bracketSequence);
+
     return 0;
 }

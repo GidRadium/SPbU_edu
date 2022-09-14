@@ -16,6 +16,8 @@ void printPrimes(int limit)
             }
         }
     }
+
+    free(mask);
 }
 
 int main(void)

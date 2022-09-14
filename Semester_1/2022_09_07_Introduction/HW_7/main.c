@@ -63,5 +63,8 @@ int main(void)
 
     printf("The number of occurrences of S1 in S is: %d\n", countNumberOfOccurrences(string, stringSize, string1, string1Size));
     
+    free(string);
+    free(string1);
+
     return 0;
 }

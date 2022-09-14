@@ -60,6 +60,8 @@ int main(void)
         printf("%d ", array[i]);
     }
 
+    free(array);
+
     printf("\n");
 
     return 0;
