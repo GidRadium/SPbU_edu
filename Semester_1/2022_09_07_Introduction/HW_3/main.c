@@ -23,8 +23,7 @@ int devide(int a, int b) {
     return quotient;
 }
 
-int main(void)
-{
+int main(void) {
     printf("a = ");
     int a = 0;
     scanf("%d", &a);
