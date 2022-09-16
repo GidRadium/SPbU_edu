@@ -24,7 +24,7 @@ int countHappyTickets(void) {
 }
 
 int main(void) {
-    printf("Happy tickets count is %d\b", countHappyTickets());
+    printf("Happy tickets count is %d\n", countHappyTickets());
 
     return 0;
 }

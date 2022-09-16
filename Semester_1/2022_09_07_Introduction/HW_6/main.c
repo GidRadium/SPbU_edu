@@ -8,7 +8,7 @@ void printPrimes(size_t limit) {
         if (!mask[i]) {
             printf("%d ", i);
             for (size_t j = i; j <= limit; j += i) {
-                mask[j] = 1;
+                mask[j] = true;
             }
         }
     }
