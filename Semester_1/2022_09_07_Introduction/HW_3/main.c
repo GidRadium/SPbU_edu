@@ -36,7 +36,7 @@ int main(void) {
         return 0;
     }
 
-    printf("a / b = %d\b", devide(a, b));
+    printf("a / b = %d\n", devide(a, b));
 
     return 0;
 }
