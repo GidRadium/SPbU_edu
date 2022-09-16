@@ -2,32 +2,41 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-int divide(int dividend, int divisor) {
+int devide(int a, int b) {
+    bool isNegative = (a < 0) ^ (b < 0);
+    a = abs(a);
+    b = abs(b);
+
     int quotient = 0;
-    int remainder = dividend;
-    while (remainder < 0 || remainder > abs(divisor))
-    {
-        quotient += ((dividend < 0) ^ (divisor < 0)) ? -1 : 1;
-        remainder = dividend - divisor * quotient;
+    while ((quotient + 1) * b <= a) {
+        quotient++;
     }
-    
+
+    if (isNegative) {
+        if (quotient * b < a) {
+            quotient++;
+        }
+
+        quotient = -quotient;
+    }
+
     return quotient;
 }
 
 int main(void) {
-    printf("dividend = ");
-    int dividend = 0;
-    scanf("%d", &dividend);
+    printf("a = ");
+    int a = 0;
+    scanf("%d", &a);
 
-    printf("divisor = ");
-    int divisor = 0;
-    scanf("%d", &divisor);
-    if (divisor == 0) {
+    printf("b = ");
+    int b = 0;
+    scanf("%d", &b);
+    if (b == 0) {
         printf("Error! Can't divide by 0.\n");
         return 0;
     }
 
-    printf("dividend / divisor = %d\n", divide(dividend, divisor));
+    printf("a / b = %d\n", devide(a, b));
 
     return 0;
 }
