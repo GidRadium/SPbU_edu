@@ -1,22 +1,24 @@
 #include <stdio.h>
 
-void swapIntegers(int *a, int *b)
-{
+void swapIntegers(int *a, int *b) {
     *a = (*a ^ *b);
     *b = (*a ^ *b);
     *a = (*a ^ *b);
 }
 
-int main(int argc, char *argv[])
-{
-    int a = 0;
-    int b = 0;
+int main(void) {
     printf("a = ");
+    int a = 0;
     scanf("%d", &a);
+
     printf("b = ");
+    int b = 0;
     scanf("%d", &b);
+
     swapIntegers(&a, &b);
+
     printf("a = %d\n", a);
     printf("b = %d\n", b);
+
     return 0;
 }
