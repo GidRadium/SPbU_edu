@@ -56,13 +56,13 @@ bool testCorrection(void) {
 
     for (int i = 0; i < testArraySize; i++) {
         if (fibonacciLinear(testArray[i]) != resultArray[i]) {
-            printf("ERROR! fibonacciLinear(%d) = %d, but right answer is %d.\n", 
+            printf("ERROR! fibonacciLinear(%d) = %lld, but right answer is %lld.\n", 
                 testArray[i], fibonacciLinear(testArray[i]), resultArray[i]);
             testsComleted = false;
         }
 
         if (fibonacciRecursive(testArray[i]) != resultArray[i]) {
-            printf("ERROR! fibonacciRecursive(%d) = %d, but right answer is %d.\n", 
+            printf("ERROR! fibonacciRecursive(%d) = %lld, but right answer is %lld.\n", 
                 testArray[i], fibonacciRecursive(testArray[i]), resultArray[i]);
             testsComleted = false;
         }
@@ -87,7 +87,7 @@ void testDuration(void) {
         fibonacciRecursive(i);
         stopRecursive = clock();
 
-        printf("N = %d) %2.3f | %2.3f\n", i, 
+        printf("N = %d) %2.3f | %2.3f seconds\n", i, 
             (double)(stopLinear - startLinear) / CLOCKS_PER_SEC, 
             (double)(stopRecursive - startRecursive) / CLOCKS_PER_SEC);
     }
@@ -103,7 +103,7 @@ int main(void) {
     printf("Enter number: ");
     int number = 0;
     scanf("%d", &number);
-    printf("Fibonacci(%d) = %d\n", number, fibonacciLinear(number));
+    printf("Fibonacci(%d) = %lld\n", number, fibonacciLinear(number));
 
     return 0;
 }
