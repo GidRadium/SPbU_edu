@@ -5,7 +5,7 @@
 int divide(int dividend, int divisor) {
     int quotient = 0;
     int remainder = dividend;
-    while (remainder < 0 || remainder > abs(divisor))
+    while (remainder < 0 || remainder >= abs(divisor))
     {
         quotient += ((dividend < 0) ^ (divisor < 0)) ? -1 : 1;
         remainder = dividend - divisor * quotient;
@@ -27,7 +27,7 @@ int main(void) {
         return 0;
     }
 
-    printf("dividend / divisor = %d\n", divide(dividend, divisor));
+    printf("%d / %d = %d\n", dividend, divisor, divide(dividend, divisor));
 
     return 0;
 }
