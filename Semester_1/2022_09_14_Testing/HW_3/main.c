@@ -78,12 +78,12 @@ bool testCorrectness(const int functionNumber) {
     struct CorrectTest tests[6];
     size_t testsSize = 6;
 
-    tests[0] = (struct CorrectTest) {5, (int[5]) {0, 1, 2, 3, 4}, (int[5]) {0, 1, 2, 3, 4}};
-    tests[1] = (struct CorrectTest) {5, (int[5]) {4, 3, 2, 1, 0}, (int[5]) {0, 1, 2, 3, 4}};
-    tests[2] = (struct CorrectTest) {5, (int[5]) {1, 3, 0, 2, 4}, (int[5]) {0, 1, 2, 3, 4}};
-    tests[3] = (struct CorrectTest) {5, (int[5]) {0, 0, 0, 0, 0}, (int[5]) {0, 0, 0, 0, 0}};
-    tests[4] = (struct CorrectTest) {1, (int[1]) {-1000000}, (int[1]) {-1000000}};
-    tests[5] = (struct CorrectTest) {5, (int[5]) {0, -5, 5, -10, 10}, (int[5]) {-10, -5, 0, 5, 10}};
+    tests[0] = (struct CorrectTest){5, (int[5]){0, 1, 2, 3, 4}, (int[5]){0, 1, 2, 3, 4}};
+    tests[1] = (struct CorrectTest){5, (int[5]){4, 3, 2, 1, 0}, (int[5]){0, 1, 2, 3, 4}};
+    tests[2] = (struct CorrectTest){5, (int[5]){1, 3, 0, 2, 4}, (int[5]){0, 1, 2, 3, 4}};
+    tests[3] = (struct CorrectTest){5, (int[5]){0, 0, 0, 0, 0}, (int[5]){0, 0, 0, 0, 0}};
+    tests[4] = (struct CorrectTest){1, (int[1]){-1000000}, (int[1]){-1000000}};
+    tests[5] = (struct CorrectTest){5, (int[5]){0, -5, 5, -10, 10}, (int[5]){-10, -5, 0, 5, 10}};
 
     bool testsComleted = true;
     for (int i = 0; i < testsSize; i++) {
@@ -133,7 +133,7 @@ void compareDuration(void) {
     clock_t startBubbleSort = clock();
     bubbleSort(array1, arraySize);
     clock_t stopBubbleSort = clock();
-    
+
     clock_t startCountingSort = clock();
     countingSort(array2, arraySize);
     clock_t stopCountingSort = clock();
