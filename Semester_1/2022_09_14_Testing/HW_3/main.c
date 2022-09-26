@@ -79,7 +79,7 @@ bool testCorrectness(int functionNumber) {
     size_t testsSize = 6;
 
     tests[0] = (struct CorrectTest){5, (int[5]){0, 1, 2, 3, 4}, (int[5]){0, 1, 2, 3, 4}};
-    tests[1] = (struct CorrectTest){5, (int[5]){4, 3, 2, 1, 1}, (int[5]){0, 1, 2, 3, 4}};
+    tests[1] = (struct CorrectTest){5, (int[5]){4, 3, 2, 1, 0}, (int[5]){0, 1, 2, 3, 4}};
     tests[2] = (struct CorrectTest){5, (int[5]){1, 3, 0, 2, 4}, (int[5]){0, 1, 2, 3, 4}};
     tests[3] = (struct CorrectTest){5, (int[5]){0, 0, 0, 0, 0}, (int[5]){0, 0, 0, 0, 0}};
     tests[4] = (struct CorrectTest){1, (int[1]){-1000000}, (int[1]){-1000000}};
@@ -127,4 +127,28 @@ int main(void) {
     }
 
     printf("Tests completed!\n");
+    
+    int arraySize = 0;
+    while (arraySize <= 0) {
+        printf("Enter array size: ");
+        scanf("%d", &arraySize);
+        if (arraySize <= 0) {
+            printf("ERROR! Array size can't be less than 0.\n");
+        }
+    }
+
+    printf("Enter array:\n");
+    int *array = calloc((size_t)arraySize, sizeof(int));
+    for (int i = 0; i < arraySize; i++) {
+        scanf("%d", &array[i]);
+    }
+
+    bubbleSort(array, (size_t)arraySize);
+
+    printf("Sorted array:\n");
+    for (int i = 0; i < arraySize; i++) {
+        printf("%d ", array[i]);
+    }
+    
+    free(array);
 }
