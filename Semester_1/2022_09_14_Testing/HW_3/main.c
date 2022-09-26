@@ -119,6 +119,34 @@ bool testCorrectness(const int functionNumber) {
     return testsComleted;
 }
 
+void compareDuration(void) {
+    const size_t arraySize = 100000;
+    printf("BubbleSort VS CountingSort on %zu element array:\n", arraySize);
+    int *array1 = calloc(arraySize, sizeof(int));
+    int *array2 = calloc(arraySize, sizeof(int));
+
+    for (size_t i = 0; i < arraySize; i++) {
+        array1[i] = rand() - RAND_MAX / 2;
+        array2[i] = array1[i];
+    }
+
+    clock_t startBubbleSort = clock();
+    bubbleSort(array1, arraySize);
+    clock_t stopBubbleSort = clock();
+    
+    clock_t startCountingSort = clock();
+    countingSort(array2, arraySize);
+    clock_t stopCountingSort = clock();
+
+    free(array1);
+    free(array2);
+
+    printf("BubbleSort:   %3.3f seconds\n"
+        , (double)(stopBubbleSort - startBubbleSort) / CLOCKS_PER_SEC);
+    printf("CountingSort: %3.3f seconds\n"
+        , (double)(stopCountingSort - startCountingSort) / CLOCKS_PER_SEC);
+}
+
 int main(void) {
     bool testsCompleted = testCorrectness(0);
     testsCompleted &= testCorrectness(1);
@@ -127,6 +155,8 @@ int main(void) {
     }
 
     printf("Tests completed!\n");
+
+    compareDuration();
 
     int arraySize = 0;
     while (arraySize <= 0) {
