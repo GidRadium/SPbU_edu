@@ -17,7 +17,7 @@ void swapInts(int *a, int *b) {
 }
 
 // function 0
-void bubbleSort(int *array, size_t size) {
+void bubbleSort(int *array, const size_t size) {
     if (size < 2) {
         return;
     }
@@ -38,7 +38,7 @@ void bubbleSort(int *array, size_t size) {
 }
 
 // function 1
-void countingSort(int *array, size_t size) {
+void countingSort(int *array, const size_t size) {
     if (size < 2) {
         return;
     }
@@ -73,17 +73,17 @@ void countingSort(int *array, size_t size) {
     free(mask);
 }
 
-bool testCorrectness(int functionNumber) {
+bool testCorrectness(const int functionNumber) {
 
     struct CorrectTest tests[6];
     size_t testsSize = 6;
 
-    tests[0] = (struct CorrectTest){5, (int[5]){0, 1, 2, 3, 4}, (int[5]){0, 1, 2, 3, 4}};
-    tests[1] = (struct CorrectTest){5, (int[5]){4, 3, 2, 1, 0}, (int[5]){0, 1, 2, 3, 4}};
-    tests[2] = (struct CorrectTest){5, (int[5]){1, 3, 0, 2, 4}, (int[5]){0, 1, 2, 3, 4}};
-    tests[3] = (struct CorrectTest){5, (int[5]){0, 0, 0, 0, 0}, (int[5]){0, 0, 0, 0, 0}};
-    tests[4] = (struct CorrectTest){1, (int[1]){-1000000}, (int[1]){-1000000}};
-    tests[5] = (struct CorrectTest){5, (int[5]){0, -5, 5, -10, 10}, (int[5]){-10, -5, 0, 5, 10}};
+    tests[0] = (struct CorrectTest) {5, (int[5]) {0, 1, 2, 3, 4}, (int[5]) {0, 1, 2, 3, 4}};
+    tests[1] = (struct CorrectTest) {5, (int[5]) {4, 3, 2, 1, 0}, (int[5]) {0, 1, 2, 3, 4}};
+    tests[2] = (struct CorrectTest) {5, (int[5]) {1, 3, 0, 2, 4}, (int[5]) {0, 1, 2, 3, 4}};
+    tests[3] = (struct CorrectTest) {5, (int[5]) {0, 0, 0, 0, 0}, (int[5]) {0, 0, 0, 0, 0}};
+    tests[4] = (struct CorrectTest) {1, (int[1]) {-1000000}, (int[1]) {-1000000}};
+    tests[5] = (struct CorrectTest) {5, (int[5]) {0, -5, 5, -10, 10}, (int[5]) {-10, -5, 0, 5, 10}};
 
     bool testsComleted = true;
     for (int i = 0; i < testsSize; i++) {
@@ -92,7 +92,7 @@ bool testCorrectness(int functionNumber) {
         } else {
             countingSort(tests[i].array, tests[i].size);
         }
-        
+
         bool testComleted = true;
         for (int j = 0; j < tests[i].size; j++) {
             if (tests[i].array[j] != tests[i].result[j]) {
@@ -127,7 +127,7 @@ int main(void) {
     }
 
     printf("Tests completed!\n");
-    
+
     int arraySize = 0;
     while (arraySize <= 0) {
         printf("Enter array size: ");
@@ -149,6 +149,6 @@ int main(void) {
     for (int i = 0; i < arraySize; i++) {
         printf("%d ", array[i]);
     }
-    
+
     free(array);
 }
