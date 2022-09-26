@@ -4,12 +4,19 @@
 #include <time.h>
 #include <limits.h>
 
+struct CorrectTest {
+    size_t size;
+    int *array;
+    int *result;
+};
+
 void swapInts(int *a, int *b) {
     *a = *a ^ *b;
     *b = *a ^ *b;
     *a = *a ^ *b;
 }
 
+// function 0
 void bubbleSort(int *array, size_t size) {
     if (size < 2) {
         return;
@@ -30,6 +37,7 @@ void bubbleSort(int *array, size_t size) {
     }
 }
 
+// function 1
 void countingSort(int *array, size_t size) {
     if (size < 2) {
         return;
@@ -65,6 +73,58 @@ void countingSort(int *array, size_t size) {
     free(mask);
 }
 
-int main(void) {
+bool testCorrectness(int functionNumber) {
 
+    struct CorrectTest tests[6];
+    size_t testsSize = 6;
+
+    tests[0] = (struct CorrectTest){5, (int[5]){0, 1, 2, 3, 4}, (int[5]){0, 1, 2, 3, 4}};
+    tests[1] = (struct CorrectTest){5, (int[5]){4, 3, 2, 1, 1}, (int[5]){0, 1, 2, 3, 4}};
+    tests[2] = (struct CorrectTest){5, (int[5]){1, 3, 0, 2, 4}, (int[5]){0, 1, 2, 3, 4}};
+    tests[3] = (struct CorrectTest){5, (int[5]){0, 0, 0, 0, 0}, (int[5]){0, 0, 0, 0, 0}};
+    tests[4] = (struct CorrectTest){1, (int[1]){-1000000}, (int[1]){-1000000}};
+    tests[5] = (struct CorrectTest){5, (int[5]){0, -5, 5, -10, 10}, (int[5]){-10, -5, 0, 5, 10}};
+
+    bool testsComleted = true;
+    for (int i = 0; i < testsSize; i++) {
+        if (functionNumber == 0) {
+            bubbleSort(tests[i].array, tests[i].size);
+        } else {
+            countingSort(tests[i].array, tests[i].size);
+        }
+        
+        bool testComleted = true;
+        for (int j = 0; j < tests[i].size; j++) {
+            if (tests[i].array[j] != tests[i].result[j]) {
+                testComleted = false;
+                testsComleted = false;
+            }
+        }
+
+        if (!testComleted) {
+            printf("ERROR! Function %d. Test %d. Not passed:\n", functionNumber, i);
+            for (int j = 0; j < tests[i].size; j++) {
+                printf("%d ", tests[i].array[j]);
+            }
+
+            printf("\n");
+            for (int j = 0; j < tests[i].size; j++) {
+                printf("%d ", tests[i].result[j]);
+            }
+
+            printf("\n");
+        }
+    }
+
+    return testsComleted;
+}
+
+int main(void) {
+    bool testsCompleted = testCorrectness(0);
+    testsCompleted &= testCorrectness(1);
+    if (!testsCompleted) {
+        return -1;
+    }
+
+    printf("Tests completed!\n");
 }
