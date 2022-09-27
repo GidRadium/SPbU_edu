@@ -33,6 +33,42 @@ void halfOfQsort(int *array, const size_t size) {
     }
 }
 
-int main(void) {
+bool testCorrectness(void) {
 
+    bool testsCompleted = true;
+
+    return testsCompleted;
+}
+
+int main(void) {
+    if (!testCorrectness()) {
+        return -1;
+    }
+
+    printf("Tests completed!\n");
+
+    
+
+    const size_t size = 10;
+    int *array = calloc(size, sizeof(int));
+    srand(time(0));
+    for (size_t i = 0; i < size; i++) {
+        array[i] = rand();
+    }
+
+    printf("Before halfOfQsort():\n");
+    for (size_t i = 0; i < size; i++) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
+
+    halfOfQsort(array, size);
+
+    printf("After halfOfQsort():\n");
+    for (size_t i = 0; i < size; i++) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
+
+    free(array);
 }
