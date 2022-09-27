@@ -74,14 +74,14 @@ bool testCorrectness(void) {
         (struct CorrectTest){-0.1, 10, 0.0000000001}
     };
 
-    bool testsComleted = true;
+    bool testsCompleted = true;
     for (int i = 0; i < testArraySize; i++) {
-        testsComleted &= 
-            handleTest(testArray[i], powLinear(testArray[i].number, testArray[i].power), "powLinear") ||
-            handleTest(testArray[i], powRecursive(testArray[i].number, testArray[i].power), "powRecursive");
+        testsCompleted &= 
+            handleTest(testArray[i], powLinear(testArray[i].number, testArray[i].power), "powLinear")
+            || handleTest(testArray[i], powRecursive(testArray[i].number, testArray[i].power), "powRecursive");
     }
 
-    return testsComleted;
+    return testsCompleted;
 }
 
 int main(void) {
