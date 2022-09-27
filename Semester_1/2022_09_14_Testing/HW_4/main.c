@@ -62,6 +62,7 @@ bool testCorrectness(void) {
 
 int main(void) {
     srand(time(0));
+
     if (!testCorrectness()) {
         return -1;
     }
@@ -71,13 +72,14 @@ int main(void) {
     const size_t size = 10;
     int *array = calloc(size, sizeof(int));
     for (size_t i = 0; i < size; i++) {
-        array[i] = rand();
+        array[i] = rand() - RAND_MAX / 2;
     }
 
     printf("Before halfOfQsort():\n");
     for (size_t i = 0; i < size; i++) {
         printf("%d ", array[i]);
     }
+
     printf("\n");
 
     halfOfQsort(array, size);
@@ -86,6 +88,7 @@ int main(void) {
     for (size_t i = 0; i < size; i++) {
         printf("%d ", array[i]);
     }
+
     printf("\n");
 
     free(array);
