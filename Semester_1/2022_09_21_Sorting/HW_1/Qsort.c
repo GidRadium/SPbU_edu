@@ -1,4 +1,5 @@
 #include "Qsort.h"
+#include "Deque.h"
 
 void swapInts(int *a, int *b) {
     *a = *a ^ *b;
@@ -18,7 +19,7 @@ bool Qsort(int *array, size_t size) {
             }
         }
     }
-    
+
 
 
     return false;
