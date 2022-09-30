@@ -6,5 +6,7 @@ add_executable(
     2022_09_21_HW_1
     Deque.h
     Deque.c
+    Qsort.h
+    Qsort.c
     main.c
 )
