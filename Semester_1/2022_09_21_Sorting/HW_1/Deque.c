@@ -1,4 +1,4 @@
-#include "Deque.h"
+#include "deque.h"
 
 bool pushBack(Deque *deque, int value) {
     DequeNode *node = malloc(sizeof(DequeNode));
