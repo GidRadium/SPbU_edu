@@ -7,7 +7,7 @@ bool pushBack(Deque *deque, int value) {
     }
 
     *node = (DequeNode){value, NULL, NULL};
-    
+
     if (deque->size == 0) {
         deque->size = 1;
         deque->begin = node;
@@ -33,7 +33,7 @@ bool pushFront(Deque *deque, int value) {
     }
 
     *node = (DequeNode){value, NULL, NULL};
-    
+
     if (deque->size == 0) {
         deque->size = 1;
         deque->begin = node;

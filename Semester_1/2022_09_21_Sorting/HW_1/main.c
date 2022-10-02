@@ -28,6 +28,7 @@ bool testCorrectness() {
 
         free(array);
     }
+
     return testsCompleted;
 }
 
@@ -36,6 +37,7 @@ int main(void) {
         printf("Tests failed\n");
         return -1;
     }
+
     printf("Tests completed!\n");
 
     int arraySize = 0;
@@ -57,7 +59,6 @@ int main(void) {
     qSort(array, arraySize);
 
     printf("Sorted array:\n");
-
     for (int i = 0; i < arraySize; i++) {
         printf("%d ", array[i]);
     }

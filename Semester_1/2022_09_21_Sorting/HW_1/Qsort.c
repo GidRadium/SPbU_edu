@@ -17,7 +17,7 @@ bool qSort(int *array, size_t size) {
 
     pushBack(&leftBorderStack, 0);
     pushBack(&rightBorderStack, size);
-    
+
     while (leftBorderStack.size > 0) {
         const size_t left = leftBorderStack.end->value;
         popBack(&leftBorderStack);
