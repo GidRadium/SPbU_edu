@@ -47,6 +47,7 @@ int main(void) {
         if (arraySize > 0) {
             break;
         }
+        
         printf("ERROR! Array size should be more than 0.\n");
     }
 
