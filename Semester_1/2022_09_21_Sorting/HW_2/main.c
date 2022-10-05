@@ -25,7 +25,32 @@ bool isInSortedArray(int *array, size_t size, int value) {
     return value == array[left];
 }
 
+bool testCorrectness() {
+    bool testsCompleted = true;
+
+    int array[6] = {2839, 3939, 23, 0, -100, 1000};
+    int requests[10] = {2839, -1000, 100, -100, 0, 23, 22, 24, 10000, 3940};
+    bool answers[10] = {true, false, false, true, true, true, false, false, false, false};
+
+    qSort(array, 6);
+
+    for (int i = 0; i < 10; i++) {
+        if (isInSortedArray(array, 6, requests[i]) != answers[i]) {
+            testsCompleted = false;
+        }
+    }
+
+    return testsCompleted;
+}
+
 int main(void) {
+    if (!testCorrectness()) {
+        printf("ERROR! Tests failed.\n");
+        return -1;
+    }
+
+    printf("Tests completed!\n");
+
     int n = 0;
     while (true) {
         printf("Enter array size: ");
