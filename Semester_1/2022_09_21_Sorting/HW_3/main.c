@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <time.h>
 
 int getMostCommon(const int *array, const size_t size) {
     if (size == 0) {
@@ -43,7 +42,23 @@ int getMostCommon(const int *array, const size_t size) {
 bool testCorrectness() {
     bool testsCompleted = true;
 
+    const size_t testsCount = 5;
+    const size_t testsSize = 10;
+    const array[5][10] = {
+        {1, 2, 3, 4, 5, 6, 7, 8, 9, 0},
+        {4, 3, 5, 1, 2, 3, 4, 5, 6, 1},
+        {1, 2, 3, 0, 0, 0, 0, 1, 1, 1},
+        {0, 2, 5, 1, 3, 100, 100, 101, 10, 10},
+        {-100, -100, 0, 0, 0, 0, 10, 10, 10, 1}
+    };
 
+    const resultsArray[5] = {0, 1, 0, 10, 0};
+
+    for (size_t i = 0; i < testsCount; i++) {
+        if (resultsArray[i] != getMostCommon(array[i], testsSize)) {
+            testsCompleted = false;
+        }
+    }
 
     return testsCompleted;
 }
@@ -73,7 +88,6 @@ int main(void) {
     }
 
     printf("Enter %d integers:\n", size);
-
     for (int i = 0; i < size; i++) {
         scanf("%d", &array[i]);
     }
