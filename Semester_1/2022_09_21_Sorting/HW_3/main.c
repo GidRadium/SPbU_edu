@@ -43,6 +43,8 @@ int getMostCommon(const int *array, const size_t size) {
 bool testCorrectness() {
     bool testsCompleted = true;
 
+
+
     return testsCompleted;
 }
 
@@ -54,23 +56,29 @@ int main(void) {
 
     printf("Tests completed!\n");
 
-    int n = 0;
+    int size = 0;
     while (true) {
         printf("Enter array size: ");
-        scanf("%d", &n);
-        if (n > 0) {
+        scanf("%d", &size);
+        if (size > 0) {
             break;
         }
 
         printf("ERROR! Array size should be more than 0.\n");
     }
 
-    int *array = malloc((size_t)n * sizeof(int));
+    int *array = calloc((size_t)size, sizeof(int));
     if (array == NULL) {
         printf("ERROR! Can't allocate memory.\n");
     }
 
-    printf("Most common element is %d.\n", getMostCommon(array, (size_t)n));
+    printf("Enter %d integers:\n", size);
+
+    for (int i = 0; i < size; i++) {
+        scanf("%d", &array[i]);
+    }
+
+    printf("Most common element is %d.\n", getMostCommon(array, (size_t)size));
 
     free(array);
 
