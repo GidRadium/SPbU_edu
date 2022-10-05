@@ -58,6 +58,7 @@ int main(void) {
         if (n > 0) {
             break;
         }
+
         printf("ERROR! Array size should be more than 0.\n");
     }
 
@@ -82,6 +83,7 @@ int main(void) {
         if (k > 0) {
             break;
         }
+
         printf("ERROR! Number of requests should be more than 0.\n");
     }
 
