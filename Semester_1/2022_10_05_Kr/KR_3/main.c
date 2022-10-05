@@ -49,7 +49,6 @@ void printAllCommentsFromFile(const char* path) {
             free(data[i]);
         }
     }
-
 }
 
 int main(void) {
@@ -60,4 +59,6 @@ int main(void) {
     printAllCommentsFromFile(path);
 
     free(path);
+
+    return 0;
 }
