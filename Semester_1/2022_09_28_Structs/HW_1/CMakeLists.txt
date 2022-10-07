@@ -8,3 +8,10 @@ add_executable(
     BinInt.c
     main.c
 )
+
+add_executable(
+    2022_09_28_HW_1_test
+    BinInt.h
+    BinInt.c
+    test.c
+)

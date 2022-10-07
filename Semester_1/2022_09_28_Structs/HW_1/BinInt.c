@@ -14,12 +14,12 @@ BinInt toBinInt(int value) {
 
 int fromBinInt(BinInt binInt) {
     int result = 0;
-    if (!binInt.data[31]) {
-        for (int i = 0; i < 31; i++) {
-            result += (binInt.data[i] ? (1 << i) : 0);
-        }
-    } else {
-        
+    for (int i = 0; i < 31; i++) {
+        result += (binInt.data[i] ? (1 << i) : 0);
+    }
+
+    if (binInt.data[31]) {
+        result = (int)((long long)result - (1ll << 31));
     }
 
     return result;

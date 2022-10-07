@@ -3,19 +3,26 @@
 
 int main(void) {
 
-    BinInt bi1 = toBinInt(1);
-    printBinInt(bi1);
-    printf("\n");
+    printf("Enter first number: ");
+    int value1 = 0;
+    scanf("%d", &value1);
 
-    BinInt bi2 = toBinInt(3);
-    printBinInt(bi2);
-    printf("\n");
+    printf("Enter second number: ");
+    int value2 = 0;
+    scanf("%d", &value2);
 
-    BinInt bi3 = summBinInts(bi1, bi2);
-    printBinInt(bi3);
-    printf("\n");
-    
-    printf("%d\n", fromBinInt(bi3));
+    printf("First:  ");
+    BinInt binValue1 = toBinInt(value1);
+    printBinInt(binValue1);
+    printf(" = %d\n", fromBinInt(binValue1));
 
-    printf("\n");
+    printf("Second: ");
+    BinInt binValue2 = toBinInt(value2);
+    printBinInt(binValue2);
+    printf(" = %d\n", fromBinInt(binValue2));
+
+    printf("Summ:   ");
+    BinInt binSumm = summBinInts(binValue1, binValue2);
+    printBinInt(binSumm);
+    printf(" = %d\n", fromBinInt(binSumm));
 }
