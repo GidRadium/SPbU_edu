@@ -10,9 +10,9 @@ int main(void) {
     bool testsCompleted = true;
     size_t arraySize = 25;
     int array[25] = {
-        INT_MIN, INT_MIN / 2, INT_MIN / 4, INT_MIN / 10, INT_MIN / 100,
-        INT_MAX, INT_MAX / 2, INT_MAX / 4, INT_MAX / 10, INT_MAX / 100,
-        0, 1, 2, 3, 10, 20, 100, 255, -1, -2, -3, -10, -20, -100, -255
+        INT_MIN, INT_MIN / 2, INT_MIN / 4, INT_MIN / 10, INT_MIN / 100
+        , INT_MAX, INT_MAX / 2, INT_MAX / 4, INT_MAX / 10, INT_MAX / 100
+        , 0, 1, 2, 3, 10, 20, 100, 255, -1, -2, -3, -10, -20, -100, -255
     };
 
     for (size_t i = 0; i < arraySize; i++) {
@@ -40,7 +40,7 @@ int main(void) {
         return -1;
     }
 
-    printf("Success! All tests pased.\n");
+    printf("Success! All tests passed.\n");
 
     return 0;
 }

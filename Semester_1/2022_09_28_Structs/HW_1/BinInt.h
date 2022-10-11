@@ -6,14 +6,14 @@ typedef struct BinInt {
     bool data[32];
 } BinInt;
 
-// comment
+// Function, that converts int to BinInt.
 BinInt toBinInt(int value);
 
-// comment
+// Function, that converts BinInt to int.
 int fromBinInt(BinInt binInt);
 
-// comment
+// Function, that prints BinInt as 32 zeros and ones.
 void printBinInt(BinInt binInt);
 
-// comment
+// Function, that adds two BinInt numbers.
 BinInt summBinInts(BinInt a, BinInt b);
