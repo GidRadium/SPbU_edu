@@ -36,6 +36,7 @@ int main(void) {
 
     if (!testsCompleted) {
         printf("ERROR! Some tests failed.\n");
+
         return -1;
     }
 
