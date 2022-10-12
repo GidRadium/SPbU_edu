@@ -2,35 +2,67 @@
 
 #include <stdio.h>
 
-int *readArrayFromFile(const char *fileName, int *readedArraySize) {
-
-}
-
-int main(void) {
-    /*
-    char *fileName = "input.txt";
+int *readUnlimitedArrayFromFile(const char *fileName, size_t *readedArraySize) {
     FILE *file = fopen(fileName, "r");
     if (file == NULL) {
         printf("ERROR! File not found.\n");
+        return NULL;
+    }
+
+    size_t size = 1;
+    size_t lastEmpty = 0;
+    int *array = malloc(size * sizeof(int));
+    int temp = 0;
+
+    while (!feof(file)) {
+        fscanf(file, "%d", &temp);
+
+        if (lastEmpty == size) {
+            size *= 2;
+            int* tempArray = malloc(size * sizeof(int));
+            for (size_t i = 0; i < lastEmpty; i++) {
+                tempArray[i] = array[i];
+            }
+
+            free(array);
+            array = tempArray;
+        }
+
+        array[lastEmpty] = temp;
+        lastEmpty++;
+    }
+
+    fclose(file);
+
+    int *finallyArray = malloc(lastEmpty * sizeof(int));
+    for (size_t i = 0; i < lastEmpty; i++) {
+        finallyArray[i] = array[i];
+    }
+
+    free(array);
+
+    *readedArraySize = lastEmpty;
+    return finallyArray;
+}
+
+int main(void) {
+    size_t size = 0;
+    int *array = readUnlimitedArrayFromFile("../../input.txt", &size);
+    if (array == NULL) {
         return -1;
     }
 
-    while (!feof (file))
-
-    int *array = malloc(1 * sizeof(int));
-
-    if (temp < 0) {
-        printf("ERROR! Array size can't be less than 0.\n");
-        fclose(file);
-        return -1;
-    }
-
-    size_t size = temp;
-
+    printf("Array:\n");
     for (size_t i = 0; i < size; i++) {
-        
+        printf("%d ", array[i]);
     }
-    */
+
+    qSort(array, size);
+
+    printf("\nSorted:\n");
+    for (size_t i = 0; i < size; i++) {
+        printf("%d ", array[i]);
+    }
 
     return 0;
 }
