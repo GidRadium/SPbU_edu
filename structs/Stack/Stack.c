@@ -6,12 +6,16 @@ typedef struct StackElement {
 } StackElement;
 
 typedef struct Stack {
-    StackElement* head;
+    StackElement *head;
     size_t size;
 } Stack;
 
-Stack* createStack(int *errorCode) {
-    Stack* stack = malloc(sizeof(stack));
+Stack *createStack(int *errorCode) {
+    if (errorCode != NULL) {
+        *errorCode = 0;
+    }
+
+    Stack *stack = malloc(sizeof(Stack));
     if (stack == NULL) {
         if (errorCode != NULL) {
             *errorCode = -1;
@@ -27,6 +31,10 @@ Stack* createStack(int *errorCode) {
 }
 
 void deleteStack(Stack *stack, int *errorCode) {
+    if (errorCode != NULL) {
+        *errorCode = 0;
+    }
+
     if (stack == NULL) {
         if (errorCode != NULL) {
             *errorCode = 1;
@@ -35,10 +43,21 @@ void deleteStack(Stack *stack, int *errorCode) {
         return;
     }
 
-    // TODO
+    while (stack->size > 0) {
+        pop(stack, errorCode);
+        if (errorCode != NULL && *errorCode != 0) {
+            break;
+        }
+    }
+
+    free(stack);
 }
 
 void clearStack(Stack *stack, int *errorCode) {
+    if (errorCode != NULL) {
+        *errorCode = 0;
+    }
+
     if (stack == NULL) {
         if (errorCode != NULL) {
             *errorCode = 1;
@@ -47,10 +66,19 @@ void clearStack(Stack *stack, int *errorCode) {
         return;
     }
 
-    // TODO
+    while (stack->size > 0) {
+        pop(stack, errorCode);
+        if (errorCode != NULL && *errorCode != 0) {
+            break;
+        }
+    }
 }
 
-void push(Stack* stack, StackValue value, int *errorCode) {
+void push(Stack *stack, StackValue value, int *errorCode) {
+    if (errorCode != NULL) {
+        *errorCode = 0;
+    }
+
     if (stack == NULL) {
         if (errorCode != NULL) {
             *errorCode = 1;
@@ -75,7 +103,11 @@ void push(Stack* stack, StackValue value, int *errorCode) {
     stack->size++;
 }
 
-void pop(Stack* stack, int *errorCode) {
+void pop(Stack *stack, int *errorCode) {
+    if (errorCode != NULL) {
+        *errorCode = 0;
+    }
+
     if (stack == NULL) {
         if (errorCode != NULL) {
             *errorCode = 1;
@@ -94,11 +126,16 @@ void pop(Stack* stack, int *errorCode) {
 
     StackElement *element = stack->head;
     stack->head = stack->head->next;
-    
+    stack->size--;
+
     free(element);
 }
 
-StackValue getTop(Stack* stack, int *errorCode) {
+StackValue getTop(Stack *stack, int *errorCode) {
+    if (errorCode != NULL) {
+        *errorCode = 0;
+    }
+
     if (stack == NULL) {
         if (errorCode != NULL) {
             *errorCode = 1;
@@ -118,6 +155,10 @@ StackValue getTop(Stack* stack, int *errorCode) {
     return stack->head->value;
 }
 
-size_t getSize(Stack* stack, int *errorCode) {
+size_t getSize(Stack *stack, int *errorCode) {
+    if (errorCode != NULL) {
+        *errorCode = 0;
+    }
+
     return stack->size;
 }

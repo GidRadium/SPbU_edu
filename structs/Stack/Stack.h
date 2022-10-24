@@ -2,32 +2,32 @@
 
 #include <stdlib.h>
 
-// comment
+// Data, that Stack contains
 typedef int StackValue;
 
-// comment
+// Node of the Stack
 typedef struct StackElement StackElement;
 
-// comment
+// User interface struct
 typedef struct Stack Stack;
 
-// comment
-Stack* createStack(int *errorCode);
+// Function that allocates memory for Stack
+Stack *createStack(int *errorCode);
 
-// comment
+// Function that frees memory from Stack
 void deleteStack(Stack *stack, int *errorCode);
 
-// comment
+// Function that pops all Stack elements
 void clearStack(Stack *stack, int *errorCode);
 
-// comment
-void push(Stack* stack, StackValue value, int *errorCode);
+// Function that adds new element to the top of the Stack
+void push(Stack *stack, StackValue value, int *errorCode);
 
-// comment
-void pop(Stack* stack, int *errorCode);
+// Function that pops element from the top of the Stack
+void pop(Stack *stack, int *errorCode);
 
-// comment
-StackValue getTop(Stack* stack, int *errorCode);
+// Function that returns top element from Stack
+StackValue getTop(Stack *stack, int *errorCode);
 
-// comment
-size_t getSize(Stack* stack, int *errorCode);
+// Function that returns count of elements in Stack
+size_t getSize(Stack *stack, int *errorCode);
