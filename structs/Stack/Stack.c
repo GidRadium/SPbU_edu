@@ -51,6 +51,7 @@ void deleteStack(Stack *stack, int *errorCode) {
     }
 
     free(stack);
+    stack = NULL;
 }
 
 void clearStack(Stack *stack, int *errorCode) {
