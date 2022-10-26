@@ -2,10 +2,16 @@
 #include "bracketSequence.h"
 
 int main(void) {
-    int errorCode = 0;
-    if (checkBracketSequenceCorrectness("()(){}{[]}", &errorCode)) {
-        printf("Correct!\n");
-    } else {
-        printf("Not correct!\n");
-    }
+    bool result = true;
+
+    result &= (checkBracketSequenceCorrectness("", NULL) == true);
+    result &= (checkBracketSequenceCorrectness("", NULL) == true);
+    result &= (checkBracketSequenceCorrectness("()()()(){}{}{}{}[][][][][]", NULL) == true);
+    result &= (checkBracketSequenceCorrectness("][", NULL) == false);
+    result &= (checkBracketSequenceCorrectness("[]()[]()[]{}{}{", NULL) == false);
+    result &= (checkBracketSequenceCorrectness("()([{[()]}])({[]})[{}]{[]}", NULL) == true);
+
+    printf(result ? "All tests passed!\n" : "Test failed!\n");
+
+    return (int)result - 1;
 }

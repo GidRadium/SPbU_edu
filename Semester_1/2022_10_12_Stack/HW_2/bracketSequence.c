@@ -73,6 +73,10 @@ bool checkBracketSequenceCorrectness(char *bracketSequence, int *errorCode) {
 
         deleteStack(stack, &stackErrorCode);
     }
+    
+    if (stackErrorCode != 0 && errorCode != NULL){
+        *errorCode = stackErrorCode;
+    }
 
     return result;
 }
