@@ -3,6 +3,9 @@
 
 int main(void) {
     int errorCode = 0;
-    checkBracketSequenceCorrectness("()(){}{[]}", &errorCode);
-    printf("%d\n", errorCode);
+    if (checkBracketSequenceCorrectness("()(){}{[]}", &errorCode)) {
+        printf("Correct!\n");
+    } else {
+        printf("Not correct!\n");
+    }
 }
