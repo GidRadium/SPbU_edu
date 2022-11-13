@@ -20,4 +20,4 @@ void erase(BinTreeMap *binTreeMap, BinTreeMapKey key);
 
 size_t getSize(BinTreeMap *binTreeMap);
 
-void deleteBinTreeMap();
+void deleteBinTreeMap(BinTreeMap *binTreeMap);

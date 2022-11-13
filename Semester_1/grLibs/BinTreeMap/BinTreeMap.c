@@ -84,3 +84,15 @@ BinTreeMapValue get(BinTreeMap *binTreeMap, BinTreeMapValue key) {
 
     return tempNode->value;
 }
+
+void erase(BinTreeMap *binTreeMap, BinTreeMapKey key) {
+
+}
+
+size_t getSize(BinTreeMap *binTreeMap) {
+    return (binTreeMap == NULL ? 0 : binTreeMap->size);
+}
+
+void deleteBinTreeMap(BinTreeMap *binTreeMap) {
+
+}
