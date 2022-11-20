@@ -18,6 +18,8 @@ DynamicArray * createDynamicArray() {
     dArray->dataSize = 0;
     dArray->preallocatedSize = 0;
     dArray->array = NULL;
+
+    return dArray;
 }
 
 void deleteDynamicArray(DynamicArray *dArray) {
