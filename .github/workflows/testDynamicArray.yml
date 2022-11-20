@@ -12,8 +12,10 @@ jobs:
     runs-on: windows-2019
     steps:
 
-    - name: V2
-      uses: actions/checkout@v2
+    - name: V3
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
 
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
