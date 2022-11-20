@@ -18,6 +18,9 @@ jobs:
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
 
+    - name: Check cmake compilers
+      run: cmake /?
+
     - name: Configure CMake
       run: cmake -G "Visual Studio 16 2019" -H "${{env.PROJ_PATH}}" -B "${{env.PROJ_PATH}}/build"
     
