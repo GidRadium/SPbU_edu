@@ -9,9 +9,8 @@ env:
 
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: ubuntu-latest
     steps:
-
     - name: V3
       uses: actions/checkout@v3
       with:
