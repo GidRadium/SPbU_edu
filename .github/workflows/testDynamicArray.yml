@@ -1,32 +1,31 @@
 name: DynamicArrayTest
+run-name: DynamicArray test
 
 on: [push]
 
 env:
   BUILD_TYPE: Release
   TARGET_NAME: DynamicArray
-  PATH: ${{github.workspace}}/structs/DynamicArray
+  PROJ_PATH: ${{github.workspace}}/structs/DynamicArray
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  Build-And-Test:
+    runs-on: windows-latest
     steps:
     - name: V3
       uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
 
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
 
     - name: Configure CMake
-      run: cmake -G "Visual Studio 16 2019" -H "${{env.PATH}}" -B "${{env.PATH}}/build"
+      run: cmake -G "Visual Studio 16 2019" -H "${{env.PROJ_PATH}}" -B "${{env.PROJ_PATH}}/build"
     
     - name: Build
-      run: cmake --build "${{env.PATH}}/build" --config ${{env.BUILD_TYPE}} --target ${{env.TARGET_NAME}}
+      run: cmake --build "${{env.PROJ_PATH}}/build" --config ${{env.BUILD_TYPE}} --target ${{env.TARGET_NAME}}
 
     - name: Run test
-      run: "${{env.PATH}}/build/${{env.BUILD_TYPE}}/test.exe"
+      run: "${{env.PROJ_PATH}}/build/${{env.BUILD_TYPE}}/test.exe"
 
     - name: Check errorlevel
       run: echo Exit Code is %errorlevel%
