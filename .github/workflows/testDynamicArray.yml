@@ -14,14 +14,14 @@ jobs:
     - name: V3
       uses: actions/checkout@v3
 
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.1
+    #- name: Add msbuild to PATH
+    #  uses: microsoft/setup-msbuild@v1.1
 
-    - name: Add msvc
-      uses: ilammy/msvc-dev-cmd@v1
+    #- name: Add msvc
+    #  uses: ilammy/msvc-dev-cmd@v1
 
-    - name: Check cmake compilers
-      run: cmake /?
+    #- name: Check cmake compilers
+    #  run: cmake /?
 
     - name: Configure CMake
       run: cmake -S "${{env.PROJ_PATH}}" -B "${{env.PROJ_PATH}}/build"
@@ -31,6 +31,3 @@ jobs:
 
     - name: Run test
       run: "${{env.PROJ_PATH}}/build/${{env.BUILD_TYPE}}/test.exe"
-
-    - name: Check errorlevel
-      run: echo Exit Code is %errorlevel%
