@@ -5,7 +5,6 @@ on: [push]
 
 env:
   BUILD_TYPE: Release
-  TARGET_NAME: DynamicArray
   PROJ_PATH: ${{github.workspace}}/structs/DynamicArray
 
 jobs:
@@ -28,7 +27,7 @@ jobs:
       run: cmake -S "${{env.PROJ_PATH}}" -B "${{env.PROJ_PATH}}/build"
 
     - name: Build
-      run: cmake --build "${{env.PROJ_PATH}}/build" --config ${{env.BUILD_TYPE}} --target ${{env.TARGET_NAME}}
+      run: cmake --build "${{env.PROJ_PATH}}/build" --config ${{env.BUILD_TYPE}} --target test
 
     - name: Run test
       run: "${{env.PROJ_PATH}}/build/${{env.BUILD_TYPE}}/test.exe"
