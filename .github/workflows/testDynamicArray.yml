@@ -12,8 +12,8 @@ jobs:
     runs-on: windows-latest
     steps:
 
-#    - name: V3
-#      uses: actions/checkout@v3
+    - name: V3
+      uses: actions/checkout@v3
 
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
