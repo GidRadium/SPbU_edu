@@ -7,5 +7,14 @@ int main(void) {
         return -1;
     }
 
+    pushBack(dArray, 100);
+    if (get(dArray, 0) != 100) {
+        return -1;
+    }
+
+    if (getSize(dArray) != 1) {
+        return -1;
+    }
+
     return 0;
 }

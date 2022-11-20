@@ -8,10 +8,12 @@ DynamicArray * createDynamicArray();
 
 void deleteDynamicArray(DynamicArray *dArray);
 
-DynamicArrayElement get(DynamicArray *dArray, size_t index);
+DynamicArrayElement get(DynamicArray *const dArray, int index);
 
-void set(DynamicArray *dArray, int index, DynamicArrayElement element);
+void set(DynamicArray *const dArray, int index, DynamicArrayElement element);
 
-void pushBack(DynamicArray *dArray, DynamicArrayElement element);
+void pushBack(DynamicArray *const dArray, DynamicArrayElement element);
 
-void popBack(DynamicArray *dArray);
+void popBack(DynamicArray *const dArray);
+
+size_t getSize(DynamicArray *const dArray);
