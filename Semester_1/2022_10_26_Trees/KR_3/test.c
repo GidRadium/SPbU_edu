@@ -17,10 +17,7 @@ int main(void) {
         return;
     }
 
-    int resultArray[256];
-    for (size_t i = 0; i < 256; i++) {
-        resultArray[i] = 0;
-    }
+    int resultArray[256] = { 0 };
 
     resultArray['\n'] = 9;
     resultArray[' '] = 6;
