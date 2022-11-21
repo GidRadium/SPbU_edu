@@ -79,7 +79,7 @@ void pushBack(DynamicArray *const dArray, DynamicArrayElement element) {
     }
 
     if (dArray->dataSize == dArray->preallocatedSize) {
-        size_t newPreallocatedSize = dArray->preallocatedSize * 2;
+        size_t newPreallocatedSize = dArray->dataSize * 2;
         if (newPreallocatedSize == 0) {
             newPreallocatedSize = 1;
         }
@@ -108,7 +108,28 @@ void popBack(DynamicArray *const dArray) {
     }
 
     dArray->dataSize--;
-    // do smth with preallocatedSize if need
+
+    if (dArray->dataSize * 4 < dArray->preallocatedSize) {
+        if (dArray->dataSize == 0) {
+            free(dArray->array);
+            dArray->array = NULL;
+            dArray->preallocatedSize = 0;
+            return;
+        }
+
+        size_t newPreallocatedSize = dArray->dataSize * 2;
+
+        DynamicArrayElement *newArray = malloc(sizeof(DynamicArrayElement) * newPreallocatedSize);
+
+        for (size_t i = 0; i < dArray->dataSize; i++) {
+            newArray[i] = dArray->array[i];
+        }
+
+        free(dArray->array);
+
+        dArray->array = newArray;
+        dArray->preallocatedSize = newPreallocatedSize;
+    }
 }
 
 size_t getSize(DynamicArray *const dArray) {
