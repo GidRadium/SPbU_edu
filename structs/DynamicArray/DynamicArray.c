@@ -22,11 +22,29 @@ DynamicArray *createDynamicArray() {
 }
 
 void deleteDynamicArray(DynamicArray *dArray) {
+    if (dArray == NULL) {
+        return;
+    }
+
     if (dArray->array != NULL) {
         free(dArray->array);
     }
 
     free(dArray);
+}
+
+void clear(DynamicArray *dArray) {
+    if (dArray == NULL) {
+        return;
+    }
+
+    if (dArray->array != NULL) {
+        free(dArray->array);
+        dArray->array = NULL;
+    }
+
+    dArray->dataSize = 0;
+    dArray->preallocatedSize = 0;
 }
 
 DynamicArrayElement get(DynamicArray *const dArray, int index) {
@@ -60,34 +78,37 @@ void pushBack(DynamicArray *const dArray, DynamicArrayElement element) {
         return;
     }
 
-    if (dArray->dataSize < dArray->preallocatedSize) {
-        dArray->array[dArray->dataSize++] = element;
-        return;
+    if (dArray->dataSize == dArray->preallocatedSize) {
+        size_t newPreallocatedSize = dArray->preallocatedSize * 2;
+        if (newPreallocatedSize == 0) {
+            newPreallocatedSize = 1;
+        }
+
+        DynamicArrayElement *newArray = malloc(sizeof(DynamicArrayElement) * newPreallocatedSize);
+
+        for (size_t i = 0; i < dArray->dataSize; i++) {
+            newArray[i] = dArray->array[i];
+        }
+
+        if (dArray->array != NULL) {
+            free(dArray->array);
+        }
+
+        dArray->array = newArray;
+        dArray->preallocatedSize = newPreallocatedSize;
     }
 
-    size_t newPreallocatedSize = dArray->preallocatedSize * 2;
-    if (newPreallocatedSize == 0) {
-        newPreallocatedSize = 1;
-    }
-
-    DynamicArrayElement *newArray = malloc(sizeof(DynamicArrayElement) * newPreallocatedSize);
-
-    for (size_t i = 0; i < dArray->preallocatedSize; i++) {
-        newArray[i] = dArray->array[i];
-    }
-
-    if (dArray->array != NULL) {
-        free(dArray->array);
-    }
-
-    dArray->array = newArray;
     dArray->array[dArray->dataSize] = element;
-    dArray->preallocatedSize = newPreallocatedSize;
     dArray->dataSize++;
 }
 
 void popBack(DynamicArray *const dArray) {
+    if (dArray == NULL || dArray->dataSize == 0) {
+        return;
+    }
 
+    dArray->dataSize--;
+    // do smth with preallocatedSize if need
 }
 
 size_t getSize(DynamicArray *const dArray) {

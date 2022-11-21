@@ -8,6 +8,8 @@ DynamicArray * createDynamicArray();
 
 void deleteDynamicArray(DynamicArray *dArray);
 
+void clear(DynamicArray *dArray);
+
 DynamicArrayElement get(DynamicArray *const dArray, int index);
 
 void set(DynamicArray *const dArray, int index, DynamicArrayElement element);
