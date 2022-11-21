@@ -24,7 +24,7 @@ int main(void) {
     printf("Done!\n");
 
     printf("Testing popBack... ");
-    for (size_t i = 9999; i >= 1000; i++) {
+    for (size_t i = 9999; i >= 1000; i--) {
         if (get(dArray, -1) != i) {
             printf("ERROR!\n");
             return -1;
