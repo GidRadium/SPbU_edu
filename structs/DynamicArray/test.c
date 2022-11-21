@@ -43,5 +43,7 @@ int main(void) {
 
     printf("Done!\n");
 
+    printf("All tests passed!\n");
+
     return 0;
 }
