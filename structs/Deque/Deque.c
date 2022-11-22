@@ -18,6 +18,8 @@ Deque *createDeque() {
         return NULL;
     }
 
+    *deque = (Deque){0, NULL, NULL};
+
     deque->size = 0;
     deque->begin = NULL;
     deque->end = NULL;
