@@ -20,10 +20,6 @@ Deque *createDeque() {
 
     *deque = (Deque){0, NULL, NULL};
 
-    deque->size = 0;
-    deque->begin = NULL;
-    deque->end = NULL;
-
     return deque;
 }
 
@@ -55,8 +51,7 @@ void clear(Deque *const deque) {
         tempNode = deque->begin;
     }
 
-    deque->size = 0;
-    deque->end = NULL;
+    *deque = (Deque){0, NULL, NULL};
 }
 
 
