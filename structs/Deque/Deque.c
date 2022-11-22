@@ -1,7 +1,7 @@
 #include "Deque.h"
 
 typedef struct DequeNode {
-    DequeElement value;
+    DequeElement element;
     struct DequeNode *prev;
     struct DequeNode *next;
 } DequeNode;
@@ -36,6 +36,7 @@ void deleteDeque(Deque *deque) {
     }
 
     free(deque);
+    
     deque = NULL;
 }
 
@@ -54,11 +55,40 @@ void clear(Deque *const deque) {
     *deque = (Deque){0, NULL, NULL};
 }
 
+void pushFront(Deque *const deque, DequeElement element) {
+    if (deque == NULL) {
+        return;
+    }
 
+    DequeNode *dequeNode = malloc(sizeof(DequeNode));
+    *dequeNode = (DequeNode){element, NULL, deque->begin};
 
+    if (deque->begin == NULL) {
+        deque->begin = dequeNode;
+        deque->end = dequeNode;
+    } else {
+        deque->begin->prev = dequeNode;
+        deque->begin = dequeNode;
+    }
 
+    deque->size++;
+}
 
+void pushBack(Deque *const deque, DequeElement element) {
+    if (deque == NULL) {
+        return;
+    }
 
+    DequeNode *dequeNode = malloc(sizeof(DequeNode));
+    *dequeNode = (DequeNode){element, deque->end, NULL};
 
+    if (deque->end == NULL) {
+        deque->begin = dequeNode;
+        deque->end = dequeNode;
+    } else {
+        deque->end->next = dequeNode;
+        deque->end = dequeNode;
+    }
 
-
+    deque->size++;
+}

@@ -12,13 +12,13 @@ void deleteDeque(Deque *deque);
 
 void clear(Deque *const deque);
 
-void pushBack(Deque *const deque, DequeElement element);
-
 void pushFront(Deque *const deque, DequeElement element);
 
-void popBack(Deque *const deque);
+void pushBack(Deque *const deque, DequeElement element);
 
 void popFront(Deque *const deque);
+
+void popBack(Deque *const deque);
 
 DequeElement getBack(Deque *const deque);
 
