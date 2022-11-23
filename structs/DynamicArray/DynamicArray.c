@@ -14,9 +14,7 @@ DynamicArray *createDynamicArray() {
         return NULL;
     }
 
-    dArray->dataSize = 0;
-    dArray->preallocatedSize = 0;
-    dArray->array = NULL;
+    *dArray = (DynamicArray){NULL, 0, 0};
 
     return dArray;
 }
@@ -40,11 +38,9 @@ void clear(DynamicArray *dArray) {
 
     if (dArray->array != NULL) {
         free(dArray->array);
-        dArray->array = NULL;
     }
 
-    dArray->dataSize = 0;
-    dArray->preallocatedSize = 0;
+    *dArray = (DynamicArray){NULL, 0, 0};
 }
 
 DynamicArrayElement get(DynamicArray *const dArray, int index) {

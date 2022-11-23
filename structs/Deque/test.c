@@ -65,6 +65,8 @@ int main(void) {
 
     printf("Done!\n");
 
+    deleteDeque(deque);
+
     printf("All tests passed!\n");
 
     return 0;

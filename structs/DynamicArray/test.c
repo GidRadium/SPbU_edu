@@ -43,6 +43,8 @@ int main(void) {
 
     printf("Done!\n");
 
+    deleteDynamicArray(dArray);
+
     printf("All tests passed!\n");
 
     return 0;
