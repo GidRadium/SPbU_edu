@@ -36,7 +36,7 @@ void deleteDeque(Deque *deque) {
     }
 
     free(deque);
-    
+
     deque = NULL;
 }
 
@@ -91,4 +91,36 @@ void pushBack(Deque *const deque, DequeElement element) {
     }
 
     deque->size++;
+}
+
+void popFront(Deque *const deque) {
+    if (deque == NULL || deque->begin == NULL) {
+        return;
+    }
+
+    DequeNode *dequeNode = deque->begin;
+    deque->begin = deque->begin->next;
+    if (deque->begin == NULL) {
+        deque->end = NULL;
+    } else {
+        deque->begin->prev = NULL;
+    }
+
+    free(dequeNode);
+}
+
+void popBack(Deque *const deque) {
+    if (deque == NULL || deque->end == NULL) {
+        return;
+    }
+
+    DequeNode *dequeNode = deque->end;
+    deque->end = deque->end->prev;
+    if (deque->end == NULL) {
+        deque->begin = NULL;
+    } else {
+        deque->end->next = NULL;
+    }
+
+    free(dequeNode);
 }
