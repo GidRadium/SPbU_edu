@@ -20,8 +20,8 @@ void popFront(Deque *const deque);
 
 void popBack(Deque *const deque);
 
-DequeElement getBack(Deque *const deque);
-
 DequeElement getFront(Deque *const deque);
+
+DequeElement getBack(Deque *const deque);
 
 size_t getSize(Deque *const deque);

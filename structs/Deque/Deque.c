@@ -107,6 +107,8 @@ void popFront(Deque *const deque) {
     }
 
     free(dequeNode);
+
+    deque->size--;
 }
 
 void popBack(Deque *const deque) {
@@ -123,4 +125,30 @@ void popBack(Deque *const deque) {
     }
 
     free(dequeNode);
+
+    deque->size--;
+}
+
+DequeElement getFront(Deque *const deque) {
+    if (deque == NULL || deque->begin == NULL) {
+        return 0;
+    }
+
+    return deque->begin->element;
+}
+
+DequeElement getBack(Deque *const deque) {
+    if (deque == NULL || deque->end == NULL) {
+        return 0;
+    }
+
+    return deque->end->element;
+}
+
+size_t getSize(Deque *const deque) {
+    if (deque == NULL) {
+        return 0;
+    }
+
+    return deque->size;
 }
