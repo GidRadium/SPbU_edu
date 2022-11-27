@@ -1,6 +1,7 @@
 #include "Treap.h"
 
 #include <stdbool.h>
+#include <stdio.h>
 
 bool isLess(TreapKey left, TreapKey right) {
     return (left < right);
@@ -128,14 +129,15 @@ void erase(Treap *treap, TreapKey key) {
         return;
     }
 
-    TreapNode *node = treap->root;
-    while (node != NULL) {
-        if (isLess(key, node->key)) {
-            node = node->left;
-        } else if (isLess(node->key, key)) {
-            node = node->right;
+    TreapNode **node = &(treap->root);
+    while (*node != NULL) {
+        if (isLess(key, (*node)->key)) {
+            node = &((*node)->left);
+        } else if (isLess((*node)->key, key)) {
+            node = &((*node)->right);
         } else {
-            node = merge(node->left, node->right);
+            printf("found %d\n", key);
+            *node = merge((*node)->left, (*node)->right);
             treap->size--;
             return;
         }
@@ -201,4 +203,28 @@ bool isEmpty(Treap *treap) {
     }
 
     return !((bool)treap->size);
+}
+
+void addSubtreeToArray(TreapKey *array, size_t *lastEmpty, TreapNode *subtreeRoot) {
+    if (subtreeRoot == NULL) {
+        return;
+    }
+
+    addSubtreeToArray(array, lastEmpty, subtreeRoot->left);
+    array[*lastEmpty] = subtreeRoot->key;
+    (*lastEmpty)++;
+    addSubtreeToArray(array, lastEmpty, subtreeRoot->right);
+}
+
+TreapKey *getAsArray(Treap *treap) {
+    size_t size = getSize(treap);
+    if (size == 0) {
+        return NULL;
+    }
+
+    size_t lastEmpty = 0;
+    TreapKey *array = calloc(size + 10, sizeof(TreapKey));
+    addSubtreeToArray(array, &lastEmpty, treap->root);
+
+    return array;
 }
