@@ -1,11 +1,13 @@
 #include "Treap.h"
 
 #include <stdbool.h>
+#include <stdio.h>
 
-
-bool isLess(TreapKey a, TreapKey b) {
-    return a < b;
+bool isLess(TreapKey left, TreapKey right) {
+    return (left < right);
 }
+
+typedef struct TreapNode TreapNode;
 
 typedef struct TreapNode {
     TreapKey key;
@@ -30,11 +32,32 @@ Treap *createTreap() {
         return NULL;
     }
 
+    *treap = (Treap){NULL, (size_t)0};
+
     return treap;
 }
 
 void deleteTreap(Treap *treap) {
     
+}
+
+size_t count(Treap *treap, TreapKey key) {
+    if (treap == NULL || treap->root == NULL) {
+        return 0;
+    }
+
+    TreapNode* node = treap->root;
+    while (node != NULL) {
+        if (isLess(key, node->key)) {
+            node = node->left;
+        } else if (isLess(node->key, key)) {
+            node = node->right;
+        } else {
+            return 1;
+        }
+    }
+
+    return 0;
 }
 
 TreapNodePair split(TreapNode *treapNode, TreapKey key) {
@@ -60,7 +83,7 @@ TreapNode *merge(TreapNode *leftNode, TreapNode *rightNode) {
         return rightNode;
     }
 
-    if (leftNode->priority > rightNode->priority) {
+    if (rightNode->priority < leftNode->priority) {
         leftNode->right = merge(leftNode->right, rightNode);
         return leftNode;
     } else {
@@ -91,9 +114,9 @@ void erase(Treap *treap, TreapKey key) {
 
     TreapNode *node = treap->root;
     while (node != NULL) {
-        if (isLess(node->priority, key)) {
+        if (isLess(key, node->key)) {
             node = node->left;
-        } else if (isLess(key, node->priority)) {
+        } else if (isLess(node->key, key)) {
             node = node->right;
         } else {
             node = merge(node->left, node->right);
@@ -103,26 +126,7 @@ void erase(Treap *treap, TreapKey key) {
     }
 }
 
-size_t count(Treap *treap, TreapKey key) {
-    if (treap == NULL || treap->root == NULL) {
-        return 0;
-    }
-
-    TreapNode* node = treap->root;
-    while (node != NULL) {
-        if (isLess(node->priority, key)) {
-            node = node->left;
-        } else if (isLess(key, node->priority)) {
-            node = node->right;
-        } else {
-            return 1;
-        }
-    }
-
-    return 0;
-}
-
-TreapKey begin(Treap *treap) {
+TreapKey getBegin(Treap *treap) {
     if (treap == NULL || treap->root == NULL) {
         return 0;
     }
@@ -132,10 +136,10 @@ TreapKey begin(Treap *treap) {
         node = node->left;
     }
 
-    return node->priority;
+    return node->key;
 }
 
-TreapKey end(Treap *treap) {
+TreapKey getEnd(Treap *treap) {
     if (treap == NULL || treap->root == NULL) {
         return 0;
     }
@@ -145,7 +149,7 @@ TreapKey end(Treap *treap) {
         node = node->right;
     }
 
-    return node->priority;
+    return node->key;
 }
 
 size_t getSize(Treap *treap) {
@@ -163,4 +167,3 @@ bool isEmpty(Treap *treap) {
 
     return !((bool)treap->size);
 }
-

@@ -19,9 +19,9 @@ void erase(Treap *treap, TreapKey key);
 
 size_t count(Treap *treap, TreapKey key);
 
-TreapKey begin(Treap *treap);
+TreapKey getBegin(Treap *treap);
 
-TreapKey end(Treap *treap);
+TreapKey getEnd(Treap *treap);
 
 size_t getSize(Treap *treap);
 
