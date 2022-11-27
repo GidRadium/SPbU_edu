@@ -23,4 +23,6 @@ TreapKey begin(Treap *treap);
 
 TreapKey end(Treap *treap);
 
+size_t getSize(Treap *treap);
+
 bool isEmpty(Treap *treap);

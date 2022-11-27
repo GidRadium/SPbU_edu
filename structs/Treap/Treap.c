@@ -97,6 +97,7 @@ void erase(Treap *treap, TreapKey key) {
             node = node->right;
         } else {
             node = merge(node->left, node->right);
+            treap->size--;
             return;
         }
     }
@@ -120,3 +121,46 @@ size_t count(Treap *treap, TreapKey key) {
 
     return 0;
 }
+
+TreapKey begin(Treap *treap) {
+    if (treap == NULL || treap->root == NULL) {
+        return 0;
+    }
+
+    TreapNode* node = treap->root;
+    while (node->left != NULL) {
+        node = node->left;
+    }
+
+    return node->priority;
+}
+
+TreapKey end(Treap *treap) {
+    if (treap == NULL || treap->root == NULL) {
+        return 0;
+    }
+
+    TreapNode* node = treap->root;
+    while (node->right != NULL) {
+        node = node->right;
+    }
+
+    return node->priority;
+}
+
+size_t getSize(Treap *treap) {
+    if (treap == NULL) {
+        return 0;
+    }
+
+    return treap->size;
+}
+
+bool isEmpty(Treap *treap) {
+    if (treap == NULL) {
+        return 1;
+    }
+
+    return !((bool)treap->size);
+}
+
