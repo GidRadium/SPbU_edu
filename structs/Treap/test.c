@@ -26,18 +26,12 @@ int main(void) {
 
     printf("Done!\n");
 
-    
-    printTreap(treap);
-
     printf("Testing erase & getSize & getBegin... ");
     for (int i = 0; i < 5; i++) {
         erase(treap, i);
-        printTreap(treap);
         if (getSize(treap) != (size_t)(10 - i - 1) || getBegin(treap) != i + 1) {
-            printf("\n%d != %d\n", (int)getSize(treap), (10 - i - 1));
-            printf("or %d != %d\n",  getBegin(treap), i + 1);
             printf("ERROR!\n");
-            //return -1;
+            return -1;
         }
     }
 

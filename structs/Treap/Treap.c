@@ -1,7 +1,6 @@
 #include "Treap.h"
 
 #include <stdbool.h>
-#include <stdio.h>
 
 bool isLess(TreapKey left, TreapKey right) {
     return (left < right);
@@ -136,7 +135,6 @@ void erase(Treap *treap, TreapKey key) {
         } else if (isLess((*node)->key, key)) {
             node = &((*node)->right);
         } else {
-            printf("found %d\n", key);
             *node = merge((*node)->left, (*node)->right);
             treap->size--;
             return;
