@@ -2,6 +2,7 @@
 
 #include <stdbool.h>
 
+
 bool isLess(TreapKey a, TreapKey b) {
     return a < b;
 }
@@ -68,5 +69,54 @@ TreapNode *merge(TreapNode *leftNode, TreapNode *rightNode) {
     }
 }
 
+void insert(Treap *treap, TreapKey key) {
+    if (treap == NULL || count(treap, key)) {
+        return;
+    }
 
+    TreapNode *newNode = malloc(sizeof(TreapNode));
+    *newNode = (TreapNode){key, rand(), NULL, NULL};
 
+    TreapNodePair splittedRoot = split(treap->root, key);
+    splittedRoot.left = merge(splittedRoot.left, newNode);
+    treap->root = merge(splittedRoot.left, splittedRoot.right);
+
+    treap->size++;
+}
+
+void erase(Treap *treap, TreapKey key) {
+    if (treap == NULL || treap->root == NULL) {
+        return;
+    }
+
+    TreapNode *node = treap->root;
+    while (node != NULL) {
+        if (isLess(node->priority, key)) {
+            node = node->left;
+        } else if (isLess(key, node->priority)) {
+            node = node->right;
+        } else {
+            node = merge(node->left, node->right);
+            return;
+        }
+    }
+}
+
+size_t count(Treap *treap, TreapKey key) {
+    if (treap == NULL || treap->root == NULL) {
+        return 0;
+    }
+
+    TreapNode* node = treap->root;
+    while (node != NULL) {
+        if (isLess(node->priority, key)) {
+            node = node->left;
+        } else if (isLess(key, node->priority)) {
+            node = node->right;
+        } else {
+            return 1;
+        }
+    }
+
+    return 0;
+}
