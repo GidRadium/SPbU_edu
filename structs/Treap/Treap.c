@@ -1,7 +1,6 @@
 #include "Treap.h"
 
 #include <stdbool.h>
-#include <stdio.h>
 
 bool isLess(TreapKey left, TreapKey right) {
     return (left < right);
@@ -37,27 +36,44 @@ Treap *createTreap() {
     return treap;
 }
 
-void deleteTreap(Treap *treap) {
-    
+void deleteSubtree(TreapNode *subtreeRoot) {
+    if (subtreeRoot == NULL) {
+        return;
+    }
+
+    if (subtreeRoot->left != NULL) {
+        deleteSubtree(subtreeRoot->left);
+    }
+
+    if (subtreeRoot->right != NULL) {
+        deleteSubtree(subtreeRoot->right);
+    }
+
+    free(subtreeRoot);
 }
 
-size_t count(Treap *treap, TreapKey key) {
-    if (treap == NULL || treap->root == NULL) {
-        return 0;
+void deleteTreap(Treap *treap) {
+    if (treap == NULL) {
+        return;
     }
 
-    TreapNode* node = treap->root;
-    while (node != NULL) {
-        if (isLess(key, node->key)) {
-            node = node->left;
-        } else if (isLess(node->key, key)) {
-            node = node->right;
-        } else {
-            return 1;
-        }
+    if (treap->root != NULL) {
+        deleteSubtree(treap->root);
     }
 
-    return 0;
+    free(treap);
+}
+
+void clear(Treap *treap) {
+    if (treap == NULL) {
+        return;
+    }
+
+    if (treap->root != NULL) {
+        deleteSubtree(treap->root);
+    }
+
+    *treap = (Treap){NULL, 0};
 }
 
 TreapNodePair split(TreapNode *treapNode, TreapKey key) {
@@ -124,6 +140,25 @@ void erase(Treap *treap, TreapKey key) {
             return;
         }
     }
+}
+
+size_t count(Treap *treap, TreapKey key) {
+    if (treap == NULL || treap->root == NULL) {
+        return 0;
+    }
+
+    TreapNode* node = treap->root;
+    while (node != NULL) {
+        if (isLess(key, node->key)) {
+            node = node->left;
+        } else if (isLess(node->key, key)) {
+            node = node->right;
+        } else {
+            return 1;
+        }
+    }
+
+    return 0;
 }
 
 TreapKey getBegin(Treap *treap) {
