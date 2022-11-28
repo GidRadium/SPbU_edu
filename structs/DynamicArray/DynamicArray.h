@@ -1,7 +1,6 @@
 #pragma once
 
-// Stored element type
-typedef int DynamicArrayElement;
+#include "DynamicArrayPredefines.h"
 
 // Main struct of DynamicArray
 typedef struct DynamicArray DynamicArray;
