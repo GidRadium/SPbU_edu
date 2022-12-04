@@ -1,0 +1,25 @@
+name: TreapTest
+run-name: Treap test
+
+on: [push]
+
+env:
+  BUILD_TYPE: Release
+  PROJ_PATH: ${{github.workspace}}/structs/Treap
+  TARGET_NAME: test
+
+jobs:
+  Build-And-Test:
+    runs-on: windows-latest
+    steps:
+    - name: V3
+      uses: actions/checkout@v3
+
+    - name: Configure CMake
+      run: cmake -S "${{env.PROJ_PATH}}" -B "${{env.PROJ_PATH}}/build"
+
+    - name: Build
+      run: cmake --build "${{env.PROJ_PATH}}/build" --config ${{env.BUILD_TYPE}} --target ${{env.TARGET_NAME}}
+
+    - name: Run test
+      run: "${{env.PROJ_PATH}}/build/${{env.BUILD_TYPE}}/${{env.TARGET_NAME}}.exe"
