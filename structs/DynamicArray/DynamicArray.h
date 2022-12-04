@@ -28,3 +28,6 @@ void popBack(DynamicArray *const dArray);
 
 // Returns count of stored objects
 size_t getSize(DynamicArray *const dArray);
+
+// Erases element by index mod(size)
+void erase(DynamicArray * const dArray, int index);

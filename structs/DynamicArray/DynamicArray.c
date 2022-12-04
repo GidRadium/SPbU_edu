@@ -135,3 +135,20 @@ size_t getSize(DynamicArray *const dArray) {
 
     return dArray->dataSize;
 }
+
+void erase(DynamicArray * const dArray, int index) {
+    if (dArray == NULL || dArray->dataSize == 0) {
+        return;
+    }
+
+    index %= (int)dArray->dataSize;
+    if (index < 0) {
+        index += (int)dArray->dataSize;
+    }
+
+    for (size_t i = index; i + 1 < dArray->dataSize; i++) {
+        dArray->array[i] = dArray->array[i + 1];
+    }
+
+    dArray->dataSize--;
+}
