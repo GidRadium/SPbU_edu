@@ -27,7 +27,7 @@ void bubbleSort(int *array, const size_t size) {
         for (size_t i = 0; i + 1 < size; i++) {
             if (array[i] > array[i + 1]) {
                 swapInts(&array[i], &array[i + 1]);
-                isSorted = 0;
+                isSorted = false;
             }
         }
 
