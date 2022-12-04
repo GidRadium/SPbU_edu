@@ -55,13 +55,15 @@ bool testCorrectness(void) {
             testsCompleted = false;
             printf("ERROR! Test %d not passed.\n", testNumber);
         }
+
+        free(array);
     }
 
     return testsCompleted;
 }
 
 int main(void) {
-    srand(time(0));
+    srand(time(NULL));
 
     if (!testCorrectness()) {
         return -1;
