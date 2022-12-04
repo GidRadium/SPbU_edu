@@ -11,9 +11,11 @@ struct CorrectTest {
 };
 
 void swapInts(int *a, int *b) {
-    *a = *a ^ *b;
-    *b = *a ^ *b;
-    *a = *a ^ *b;
+    if (a != b) {
+        *a = *a ^ *b;
+        *b = *a ^ *b;
+        *a = *a ^ *b;
+    }
 }
 
 // function 0
@@ -55,25 +57,30 @@ void countingSort(int *array, const size_t size) {
         return;
     }
 
-    int *mask = calloc(delta + 1, sizeof(int));
+    int *elementsNumber = calloc(delta + 1, sizeof(int));
 
     for (size_t i = 0; i < size; i++) {
-        mask[array[i] - min]++;
+        elementsNumber[array[i] - min]++;
     }
 
     size_t lastEmpty = 0;
     for (size_t i = 0; i <= delta; i++) {
-        while (mask[i] > 0) {
-            mask[i]--;
+        while (elementsNumber[i] > 0) {
+            elementsNumber[i]--;
             array[lastEmpty] = i + min;
             lastEmpty++;
         }
     }
 
-    free(mask);
+    free(elementsNumber);
 }
 
-bool testCorrectness(const int functionNumber) {
+enum FunctionToTest {
+    bubbleSortFunc,
+    countingSortFunc
+};
+
+bool testCorrectness(enum FunctionToTest functionToTest) {
 
     struct CorrectTest tests[6];
     size_t testsSize = 6;
@@ -87,7 +94,7 @@ bool testCorrectness(const int functionNumber) {
 
     bool testsComleted = true;
     for (int i = 0; i < testsSize; i++) {
-        if (functionNumber == 0) {
+        if (functionToTest == bubbleSortFunc) {
             bubbleSort(tests[i].array, tests[i].size);
         } else {
             countingSort(tests[i].array, tests[i].size);
@@ -102,7 +109,7 @@ bool testCorrectness(const int functionNumber) {
         }
 
         if (!testComleted) {
-            printf("ERROR! Function %d. Test %d. Not passed:\n", functionNumber, i);
+            printf("ERROR! Function %s. Test %d. Not passed:\n", (functionToTest == bubbleSortFunc ? "bubbleSort" : "countingSort"), i);
             for (int j = 0; j < tests[i].size; j++) {
                 printf("%d ", tests[i].array[j]);
             }
