@@ -4,6 +4,8 @@ project(Set)
 
 add_executable(
     test
+    DynamicArray.h
+    DynamicArray.c
     "Set.h"
     "Set.c"
     test.c

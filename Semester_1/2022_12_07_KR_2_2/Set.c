@@ -1,17 +1,18 @@
 #include "Set.h"
 #include <stdlib.h>
+#include "DynamicArray.h"
 
 typedef struct Set {
     int value;
     int rank;
-    Set *left;
-    Set *right;
     Set *parent;
+    DynamicArray *array;
 } Set;
 
 Set *createSet(int value) {
     Set *set = malloc(sizeof(Set));
-    *set = (Set){value, 0, NULL, NULL, set};
+    *set = (Set){value, 0, set, NULL};
+    set->array = createDynamicArray();
     return set;
 }
 
@@ -39,18 +40,36 @@ Set *unite(Set *set1, Set *set2) {
     Set *set1Parent = getParent(set1);
     Set *set2Parent = getParent(set2);
 
-    if (set1Parent->rank > set2Parent->rank)
-
-
-    int *array = getAsArray(set2->treap);
-    for (size_t i = 0; i < getSize(set2->treap); i++) {
-        insert(set1->treap, array[i]);
+    if (set1Parent == set2Parent) {
+        return set1Parent;
     }
 
+    if (set1Parent->rank > set2Parent->rank) {
+        pushBack(set1Parent->array, set2Parent);
+        set1Parent->rank++;
+        set2Parent->parent = set1Parent;
+    } else {
+        pushBack(set2Parent->array, set1Parent);
+        set1Parent->parent = set2Parent;
+        set2Parent->rank++;
+    }
 
-
+    return getParent(set1Parent);
 }
 
-bool isTheSameSet(Set *set1, Set *set2);
+bool isTheSameSet(Set *set1, Set *set2) {
+    return getParent(set1) == getParent(set2);
+}
 
-void freeSet(Set *set);
+void freeSet(Set *set) {
+    if (set == NULL) {
+        return;
+    }
+
+    for (size_t i = 0; i < getSize(set->array); i++) {
+        freeSet(get(set->array, i));
+    }
+
+    deleteDynamicArray(set->array);
+    free(set);
+}

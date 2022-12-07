@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SET_H
+#define SET_H
 
 #include <stdbool.h>
 
@@ -11,3 +12,5 @@ Set *unite(Set *set1, Set *set2);
 bool isTheSameSet(Set *set1, Set *set2);
 
 void freeSet(Set *set);
+
+#endif
