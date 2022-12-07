@@ -4,8 +4,8 @@ project(HashTable)
 
 add_executable(
     test
-    #DynamicArray.h
-    #DynamicArray.c
+    DynamicArrayStrInt.h
+    DynamicArrayStrInt.c
     HashTable.h
     HashTable.c
     test.c

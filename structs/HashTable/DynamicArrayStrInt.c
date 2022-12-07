@@ -1,4 +1,4 @@
-#include "DynamicArray.h"
+#include "DynamicArrayStrInt.h"
 
 #include <stdlib.h>
 
@@ -45,7 +45,7 @@ void clear(DynamicArray *dArray) {
 
 DynamicArrayElement get(DynamicArray *const dArray, int index) {
     if (dArray == NULL || dArray->dataSize == 0) {
-        return 0;
+        return DynamicArrayElementNULL;
     }
 
     index %= (int)dArray->dataSize;
