@@ -1,6 +1,7 @@
 #include "Set.h"
-#include <stdlib.h>
 #include "DynamicArray.h"
+
+#include <stdlib.h>
 
 typedef struct Set {
     int value;
