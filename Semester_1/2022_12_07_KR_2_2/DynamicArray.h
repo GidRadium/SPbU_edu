@@ -5,7 +5,6 @@
 
 // Stored element type
 typedef Set* DynamicArrayElement;
-//#define DynamicArrayElement (Set *)
 
 // Main struct of DynamicArray
 typedef struct DynamicArray DynamicArray;

@@ -17,5 +17,9 @@ int main(void) {
         return -1;
     }
 
+    printf("Tests passed!\n");
+
     freeSet(a);
+
+    return 0;
 }
