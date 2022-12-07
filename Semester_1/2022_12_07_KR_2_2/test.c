@@ -17,6 +17,20 @@ int main(void) {
         return -1;
     }
 
+    Set *d = createSet(3);
+
+    if (isTheSameSet(d, a) || isTheSameSet(d, b)) {
+        printf("Tests failed!\n");
+        return -1;
+    }
+
+    Set *e = unite(a, d);
+
+    if (!isTheSameSet(d, a) || !isTheSameSet(d, b) || !isTheSameSet(d, c)) {
+        printf("Tests failed!\n");
+        return -1;
+    }
+
     printf("Tests passed!\n");
 
     freeSet(a);
