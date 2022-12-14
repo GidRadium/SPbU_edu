@@ -1,39 +1,45 @@
 #include <stdio.h>
-#include "Set.h"
+#include <stdbool.h>
+#include <string.h>
+#include <stdlib.h>
+
+#include "getIntStr.h"
+
+// Returns 0 (false) if correct
+bool checkCorrectness(char *input, char *output) {
+    char *result = getIntStr(input);
+    if (result == NULL) {
+        return 1;
+    }
+
+    bool answer = strcmp(result, output);
+    free(result);
+    return answer;
+}
 
 int main(void) {
-    Set *a = createSet(1);
-    Set* b = createSet(2);
 
-    if (isTheSameSet(a, b)) {
-        printf("Tests failed!\n");
+    if (checkCorrectness("0", "0")) {
+        printf("ERROR! %s != %s\n", "0", "0");
         return -1;
     }
 
-    Set *c = unite(a, b);
-
-    if (!isTheSameSet(a, b)) {
-        printf("Tests failed!\n");
+    if (checkCorrectness("1", "1")) {
+        printf("ERROR! %s != %s\n", "1", "1");
         return -1;
     }
 
-    Set *d = createSet(3);
-
-    if (isTheSameSet(d, a) || isTheSameSet(d, b)) {
-        printf("Tests failed!\n");
+    if (checkCorrectness("101010", "42")) {
+        printf("ERROR! %s != %s\n", "101010", "42");
         return -1;
     }
 
-    Set *e = unite(a, d);
-
-    if (!isTheSameSet(d, a) || !isTheSameSet(d, b) || !isTheSameSet(d, c)) {
-        printf("Tests failed!\n");
+    if (checkCorrectness("11111", "31")) {
+        printf("ERROR! %s != %s\n", "11111", "31");
         return -1;
     }
 
-    printf("Tests passed!\n");
-
-    freeSet(a);
+    printf("Tests completed!\n");
 
     return 0;
 }
