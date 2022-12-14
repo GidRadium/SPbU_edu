@@ -163,3 +163,23 @@ size_t getSize(Deque *const deque) {
 
     return deque->size;
 }
+
+void setMoreAChars(Deque *deque) {
+    if (deque == NULL || deque->size == 0) {
+        return;
+    }
+
+    size_t size = deque->size;
+
+    DequeNode *node = deque->begin;
+
+    while (size > 0)
+    {
+        if (node->element[0] == 'a') {
+            pushBack(deque, node->element);
+        }
+
+        node = node->next;
+        size--;
+    }
+}
