@@ -1,4 +1,5 @@
 #include "Deque.h"
+#include <string.h>
 
 typedef struct DequeNode {
     DequeElement element;
@@ -31,6 +32,7 @@ void deleteDeque(Deque *deque) {
     DequeNode *tempNode = deque->begin;
     while (tempNode != NULL) {
         deque->begin = deque->begin->next;
+        free(tempNode->element);
         free(tempNode);
         tempNode = deque->begin;
     }
@@ -48,6 +50,7 @@ void clear(Deque *const deque) {
     DequeNode *tempNode = deque->begin;
     while (tempNode != NULL) {
         deque->begin = deque->begin->next;
+        free(tempNode->element);
         free(tempNode);
         tempNode = deque->begin;
     }
@@ -60,8 +63,11 @@ void pushFront(Deque *const deque, DequeElement element) {
         return;
     }
 
+    DequeElement newElement = calloc(strlen(element) + 1, sizeof(char));
+    strcpy(newElement, element);
+
     DequeNode *dequeNode = malloc(sizeof(DequeNode));
-    *dequeNode = (DequeNode){element, NULL, deque->begin};
+    *dequeNode = (DequeNode){newElement, NULL, deque->begin};
 
     if (deque->begin == NULL) {
         deque->begin = dequeNode;
@@ -79,8 +85,11 @@ void pushBack(Deque *const deque, DequeElement element) {
         return;
     }
 
+    DequeElement newElement = calloc(strlen(element) + 1, sizeof(char));
+    strcpy(newElement, element);
+
     DequeNode *dequeNode = malloc(sizeof(DequeNode));
-    *dequeNode = (DequeNode){element, deque->end, NULL};
+    *dequeNode = (DequeNode){newElement, deque->end, NULL};
 
     if (deque->end == NULL) {
         deque->begin = dequeNode;
@@ -106,6 +115,7 @@ void popFront(Deque *const deque) {
         deque->begin->prev = NULL;
     }
 
+    free(dequeNode->element);
     free(dequeNode);
 
     deque->size--;
@@ -124,6 +134,7 @@ void popBack(Deque *const deque) {
         deque->end->next = NULL;
     }
 
+    free(dequeNode->element);
     free(dequeNode);
 
     deque->size--;

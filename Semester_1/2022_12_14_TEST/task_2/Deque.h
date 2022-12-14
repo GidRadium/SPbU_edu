@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 // Stored element type
-typedef int DequeElement;
+typedef char * DequeElement;
 
 // Main struct of Deque
 typedef struct Deque Deque;
@@ -37,3 +37,6 @@ DequeElement getBack(Deque *const deque);
 
 // Returns count of Deque elements
 size_t getSize(Deque *const deque);
+
+// New function for task_2
+void setMoreAChars(Deque *deque);
