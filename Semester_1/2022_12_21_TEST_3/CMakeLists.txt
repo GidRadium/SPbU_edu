@@ -8,3 +8,10 @@ add_executable(
     checkString.c
     test.c
 )
+
+add_executable(
+    main
+    checkString.h
+    checkString.c
+    main.c
+)
