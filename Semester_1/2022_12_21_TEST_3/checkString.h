@@ -2,4 +2,5 @@
 
 #include <stdbool.h>
 
-bool checkString(char *string);
+// Checks string by regular expression [A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]
+bool checkString(const char *string);

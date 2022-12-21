@@ -4,7 +4,7 @@ project(21_12_22_TEST_3)
 
 add_executable(
     test
-    Deque.h
-    Deque.c
+    checkString.h
+    checkString.c
     test.c
 )
