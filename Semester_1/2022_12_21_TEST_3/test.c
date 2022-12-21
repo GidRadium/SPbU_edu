@@ -16,9 +16,10 @@ int main(void) {
     bool result = true;
 
     result &= testAndReport("A@A.A", true);
-    result &= testAndReport("0@9.Z", true);
+    result &= testAndReport("0@9.A.Z", true);
     result &= testAndReport("0@0.0", false);
     result &= testAndReport("A@@A.Z", false);
+    result &= testAndReport("A_B.C+Z-_-@A.BCZ-.S-J-D.Z.XXX.C", true);
 
     if (!result) {
         printf("Some tests failed.\n");
@@ -26,4 +27,5 @@ int main(void) {
     }
 
     printf("All tests passed!");
+    return 0;
 }
