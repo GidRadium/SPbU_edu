@@ -10,7 +10,7 @@ add_executable(
 )
 
 add_executable(
-    PhoneBook_test
+    test
     PhoneBook.h
     PhoneBook.c
     test.c

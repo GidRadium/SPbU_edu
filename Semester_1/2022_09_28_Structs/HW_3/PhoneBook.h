@@ -2,38 +2,38 @@
 
 #include <stdlib.h>
 
-// comment
-typedef struct PhoneBookEntry {
-    long long phoneNumber;
-    char name[100];
-} PhoneBookEntry;
+// PhoneBookEntry struct.
+typedef struct PhoneBookEntry PhoneBookEntry;
 
-// comment
-typedef struct PhoneBook {
-    PhoneBookEntry entries[100];
-    size_t count;
-} PhoneBook;
+// PhoneBookEntry constructor.
+PhoneBookEntry *createPhoneBookEntry(const char *name, const char *phoneNumber);
 
-// comment
-void initNewPhoneBook(PhoneBook *phoneBook);
+// PhoneBookEntry destructor.
+void deletePhoneBookEntry(PhoneBookEntry **entry);
 
-// comment
-void readPhoneBookFromFile(PhoneBook *phoneBook);
+// Prints PhoneBookEntry in parsed form
+void printPhoneBookEntry(PhoneBookEntry *entry);
+
+// PhoneBook struct.
+typedef struct PhoneBook PhoneBook;
+
+// PhoneBook constructor.
+PhoneBook *createPhoneBook(const char *filename);
+
+// PhoneBook destructor.
+void deletePhoneBook(PhoneBook **phoneBook);
 
 // 1
-void addEntryToPhoneBook(PhoneBook *phoneBook, PhoneBookEntry entry);
+void addEntryToPhoneBook(PhoneBook *phoneBook, PhoneBookEntry* entry);
 
 // 2
 void printAllPhoneBookEntries(PhoneBook *phoneBook);
 
 // 3
-PhoneBookEntry findEntryByName(PhoneBook *phoneBook, char name[100]);
+PhoneBookEntry *findEntryByName(PhoneBook *phoneBook, const char *name);
 
 // 4
-PhoneBookEntry findEntryByPhoneNumber(PhoneBook *phoneBook, long long phoneNumber);
+PhoneBookEntry *findEntryByPhoneNumber(PhoneBook *phoneBook, const char *phoneNumber);
 
 // 5
-void savePhoneBookToFile(PhoneBook *phoneBook);
-
-// lol
-void getPhoneNumberFromString(char *string);
+void savePhoneBook(PhoneBook *phoneBook);
