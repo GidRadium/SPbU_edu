@@ -1,5 +1,6 @@
 #include "HashTable.h"
 #include <stdbool.h>
+#include <string.h>
 
 #define MIN_HASH_TABLE_ARRAY_SIZE 10
 
@@ -34,7 +35,7 @@ bool addEntryToArray(HashTableEntry *entryArray, size_t arraySize, HashTableKey 
     if (entryArray == NULL) {
         return false;
     }
-    
+
     size_t hash = getHash(key, arraySize);
     for (size_t i = hash; i < arraySize; i++) {
         if (entryArray[i].flag == false) {
@@ -49,6 +50,8 @@ bool addEntryToArray(HashTableEntry *entryArray, size_t arraySize, HashTableKey 
             i = 0;
         }
     }
+
+    return false;
 }
 
 // Resizes hashTable array.
@@ -64,7 +67,7 @@ void reconstructHashTable(HashTable *hashTable) {
     HashTableEntry *newArray = calloc(newArraySize, sizeof(HashTableEntry));
 
     if (hashTable->array != NULL) {
-        for (int i = 0; i < hashTable->arraySize; i++) {
+        for (size_t i = 0; i < hashTable->arraySize; i++) {
             if (hashTable->array[i].flag == true) {
                 addEntryToArray(newArray, newArraySize, hashTable->array[i].key, hashTable->array[i].value);
             }
@@ -87,6 +90,8 @@ HashTable *createHashTable() {
     hashTable->arraySize = 0;
     hashTable->array = NULL;
     reconstructHashTable(hashTable);
+
+    return hashTable;
 }
 
 void deleteHashTable(HashTable **hashTable) {
@@ -133,7 +138,7 @@ void set(HashTable *hashTable, HashTableKey key, int value) {
 
 int get(HashTable *hashTable, HashTableKey key) {
     if (hashTable == NULL) {
-        return;
+        return 0;
     }
 
     size_t hash = getHash(key, hashTable->arraySize);
@@ -154,5 +159,5 @@ int get(HashTable *hashTable, HashTableKey key) {
 }
 
 void deleteEntry(HashTable *hashTable, HashTableKey key) {
-
+    
 }
