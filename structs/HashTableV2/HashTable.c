@@ -17,8 +17,15 @@ bool areEqual(HashTableKey key1, HashTableKey key2) {
     return !strcmp(key1.string, key2.string);
 }
 
+typedef enum HashTableEntryFlag {
+    IsEmpty = 0,
+    ContainsData,
+    IsDeleted,
+
+} HashTableEntryFlag;
+
 typedef struct HashTableEntry {
-    bool flag;
+    HashTableEntryFlag flag;
     size_t hash;
     int value;
     HashTableKey key;
@@ -32,18 +39,34 @@ typedef struct HashTable {
 
 // Returns true if entry is new, and false if entry is overwritten.
 bool addEntryToArray(HashTableEntry *entryArray, size_t arraySize, HashTableKey key, int value) {
-    if (entryArray == NULL) {
-        return false;
-    }
-
     size_t hash = getHash(key, arraySize);
     for (size_t i = hash; i < arraySize; i++) {
-        if (entryArray[i].flag == false) {
-            entryArray[i] = (HashTableEntry){true, hash, value, key};
+        if (entryArray[i].flag == IsEmpty || IsDeleted) {
+            entryArray[i] = (HashTableEntry){ContainsData, hash, value, key};
             return true;
         } else if (hash == entryArray[i].hash && areEqual(key, entryArray[i].key)) {
             entryArray[i].value = value;
             return false;
+        }
+
+        if (i + 1 >= arraySize) {
+            i = 0;
+        }
+    }
+
+    return false;
+}
+
+// Returns true if entry is deleted sucsessfully, and false if entry wasn't exist.
+bool deleteEntryFromArray(HashTableEntry *entryArray, size_t arraySize, HashTableKey key) {
+    size_t hash = getHash(key, arraySize);
+    
+    for (size_t i = hash; i < arraySize; i++) {
+        if (entryArray[i].flag == IsEmpty) {
+            return false;
+        } else if (entryArray[i].flag == ContainsData && hash == entryArray[i].hash && areEqual(key, entryArray[i].key)) {
+            entryArray[i].flag = IsDeleted;
+            return true;
         }
 
         if (i + 1 >= arraySize) {
@@ -68,7 +91,7 @@ void reconstructHashTable(HashTable *hashTable) {
 
     if (hashTable->array != NULL) {
         for (size_t i = 0; i < hashTable->arraySize; i++) {
-            if (hashTable->array[i].flag == true) {
+            if (hashTable->array[i].flag == ContainsData) {
                 addEntryToArray(newArray, newArraySize, hashTable->array[i].key, hashTable->array[i].value);
             }
         }
@@ -143,7 +166,7 @@ int get(HashTable *hashTable, HashTableKey key) {
 
     size_t hash = getHash(key, hashTable->arraySize);
     for (size_t i = hash; i < hashTable->arraySize; i++) {
-        if (hashTable->array[i].flag == false) {
+        if (hashTable->array[i].flag == IsEmpty) {
             return 0;
         } else if (hash == hashTable->array[i].hash && areEqual(key, hashTable->array[i].key)) {
             return hashTable->array[i].value;
@@ -159,5 +182,16 @@ int get(HashTable *hashTable, HashTableKey key) {
 }
 
 void deleteEntry(HashTable *hashTable, HashTableKey key) {
-    
+    if (hashTable == NULL) {
+        return;
+    }
+
+    bool isDeleted = deleteEntryFromArray(hashTable, hashTable->arraySize, key);
+    if (isDeleted) {
+        hashTable->entriesCount--;
+    }
+
+    if (hashTable->entriesCount * 8 < hashTable->arraySize) {
+        reconstructHashTable(hashTable);
+    }
 }
