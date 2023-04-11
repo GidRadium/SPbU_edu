@@ -107,13 +107,12 @@ void clear(HashTable *hashTable) {
         return;
     }
 
-    if (hashTable->array != NULL) {
-        free(hashTable->array);
-    }
+    free(hashTable->array);
 
     hashTable->arraySize = 0;
     hashTable->entriesCount = 0;
     hashTable->array = NULL;
+
     reconstructHashTable(hashTable);
 }
 
@@ -133,7 +132,25 @@ void set(HashTable *hashTable, HashTableKey key, int value) {
 }
 
 int get(HashTable *hashTable, HashTableKey key) {
-    
+    if (hashTable == NULL) {
+        return;
+    }
+
+    size_t hash = getHash(key, hashTable->arraySize);
+    for (size_t i = hash; i < hashTable->arraySize; i++) {
+        if (hashTable->array[i].flag == false) {
+            return 0;
+        } else if (hash == hashTable->array[i].hash && areEqual(key, hashTable->array[i].key)) {
+            return hashTable->array[i].value;
+        }
+
+        if (i + 1 >= hashTable->arraySize) {
+            i = 0;
+        }
+    }
+
+    // Invariant ERROR if is here!
+    return 35505;
 }
 
 void deleteEntry(HashTable *hashTable, HashTableKey key) {
