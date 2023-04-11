@@ -12,23 +12,22 @@ int main(void) {
     set(hashTable, (HashTableKey){"lol"}, 101);
     result &= (get(hashTable, (HashTableKey){"lol"}) == 101);
     result &= (get(hashTable, (HashTableKey){"kek"}) == 0);
-    printf("%d ", result);
+
     set(hashTable, (HashTableKey){"kek"}, 434);
     result &= (get(hashTable, (HashTableKey){"lol"}) == 101);
     result &= (get(hashTable, (HashTableKey){"kek"}) == 434);
-    printf("%d ", result);
+
     set(hashTable, (HashTableKey){"lol"}, 9999);
     result &= (get(hashTable, (HashTableKey){"lol"}) == 9999);
     result &= (get(hashTable, (HashTableKey){"kek"}) == 434);
-    printf("%d ", result);
+
     deleteEntry(hashTable, (HashTableKey){"kek"});
     result &= (get(hashTable, (HashTableKey){"lol"}) == 9999);
     result &= (get(hashTable, (HashTableKey){"kek"}) == 0);
-    printf("%d ", result);
+
     deleteEntry(hashTable, (HashTableKey){"lol"});
     result &= (get(hashTable, (HashTableKey){"lol"}) == 0);
     result &= (get(hashTable, (HashTableKey){"kek"}) == 0);
-    printf("%d ", result);
 
     deleteHashTable(&hashTable);
     

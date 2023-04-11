@@ -168,7 +168,7 @@ int get(HashTable *hashTable, HashTableKey key) {
     for (size_t i = hash; i < hashTable->arraySize; i++) {
         if (hashTable->array[i].flag == IsEmpty) {
             return 0;
-        } else if (hash == hashTable->array[i].hash && areEqual(key, hashTable->array[i].key)) {
+        } else if (hashTable->array[i].flag == ContainsData && hash == hashTable->array[i].hash && areEqual(key, hashTable->array[i].key)) {
             return hashTable->array[i].value;
         }
 
@@ -186,12 +186,12 @@ void deleteEntry(HashTable *hashTable, HashTableKey key) {
         return;
     }
 
-    bool isDeleted = deleteEntryFromArray(hashTable, hashTable->arraySize, key);
+    bool isDeleted = deleteEntryFromArray(hashTable->array, hashTable->arraySize, key);
     if (isDeleted) {
         hashTable->entriesCount--;
     }
 
-    if (hashTable->entriesCount * 8 < hashTable->arraySize) {
+    if (hashTable->arraySize > 10 && hashTable->entriesCount * 8 < hashTable->arraySize) {
         reconstructHashTable(hashTable);
     }
 }
