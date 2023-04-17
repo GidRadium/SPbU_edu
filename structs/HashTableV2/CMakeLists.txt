@@ -8,3 +8,10 @@ add_executable(
     HashTable.c
     test.c
 )
+
+add_executable(
+    main
+    HashTable.h
+    HashTable.c
+    main.c
+)

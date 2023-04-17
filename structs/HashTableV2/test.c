@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include "HashTable.h"
 
-
-
 int main(void) {
     HashTable* hashTable = createHashTable();
     int value = 0;

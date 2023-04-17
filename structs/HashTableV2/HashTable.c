@@ -21,7 +21,6 @@ typedef enum HashTableEntryFlag {
     IsEmpty = 0,
     ContainsData,
     IsDeleted,
-
 } HashTableEntryFlag;
 
 typedef struct HashTableEntry {
@@ -41,7 +40,7 @@ typedef struct HashTable {
 bool addEntryToArray(HashTableEntry *entryArray, size_t arraySize, HashTableKey key, int value) {
     size_t hash = getHash(key, arraySize);
     for (size_t i = hash; i < arraySize; i++) {
-        if (entryArray[i].flag == IsEmpty || IsDeleted) {
+        if (entryArray[i].flag == IsEmpty || entryArray[i].flag == IsDeleted) {
             entryArray[i] = (HashTableEntry){ContainsData, hash, value, key};
             return true;
         } else if (hash == entryArray[i].hash && areEqual(key, entryArray[i].key)) {
