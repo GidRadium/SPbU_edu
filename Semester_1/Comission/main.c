@@ -3,30 +3,38 @@
 #include "GameOfLife.h"
 
 int main(void) {
-    int h = 0;
-    int w = 0;
-    int k = 0;
+    int height = 0;
+    int weight = 0;
+    int iterations = 0;
 
-    scanf("%d %d %d", &h, &w, &k);
+    scanf("%d %d %d", &height, &weight, &iterations);
 
-    int **data = calloc(h, sizeof(int*));
-    for (int i = 0; i < h; i++) {
-        data[i] = calloc(w, sizeof(int));
-        for (int j = 0; j < w; j++) {
-            char in = '0';
-            scanf("%c", &in);
-            data[i][j] = (in == '1');
+    int **data = calloc(height, sizeof(int*));
+
+    for (int i = 0; i < height; i++) {
+        data[i] = calloc(weight, sizeof(int));
+        for (int j = 0; j < weight; j++) {
+            int in = 0;
+            scanf("%d", &in);
+            printf("%d\n", in);
+
+            data[i][j] = in;
         }
     }
 
-    for (int i = 0; i < h; i++) {
-        for (int j = 0; j < w; j++) {
-            printf("%d", data[i][j]);
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < weight; j++) {
+            printf("%d ", data[i][j]);
         }
         printf("\n");
     }
 
-    GameOfLife *game = createGameOfLife(h, w, data);
+    GameOfLife *game = createGameOfLife(height, weight, data);
+
+    for (int i = 0; i < iterations; i++) {
+        nextFrame(game);
+    }
+
     printGameOfLife(game);
     deleteGameOfLife(&game);
 }
