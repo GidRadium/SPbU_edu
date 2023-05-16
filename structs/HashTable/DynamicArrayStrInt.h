@@ -1,7 +1,12 @@
 #pragma once
 
 // Stored element type
-typedef int DynamicArrayElement;
+typedef struct {
+    char *string;
+    int value;
+} DynamicArrayElement;
+
+#define DynamicArrayElementNULL ((DynamicArrayElement){0, 0})
 
 // Main struct of DynamicArray
 typedef struct DynamicArray DynamicArray;
